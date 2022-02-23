@@ -366,3 +366,8 @@ def proxy_scraper(cfg):
 
 if __name__ == '__main__':
     proxy_scraper(cfg)
+
+# Credits
+#
+# h110m - Adding a fancy download bar
+#
