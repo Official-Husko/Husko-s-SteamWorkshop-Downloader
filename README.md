@@ -5,6 +5,8 @@ This tool will download the file you entered via the steam workshop link and ins
 
 Don't Have python installed? No problem, you can grab the compiled exe in the Releases Section.
 
+# <img src="https://i.imgur.com/o3m1vl5.gif"> 
+
 The bot will ask for an app_id of the game you want to download mods for. This id can easily be obtained by going to the steam store of the game and copying it. For example if you want to use it for stormworks you would get this ID: https://store.steampowered.com/app/573090/Stormworks_Build_and_Rescue/ >>>>> 573090  
   
 Other Infos can be found on the [Wiki][1]!
