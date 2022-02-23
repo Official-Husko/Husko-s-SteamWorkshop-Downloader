@@ -16,6 +16,7 @@ Proxy Scraper: to anonymize request
 Randomized User Agent to Further Anonymize request sent  
 Automatic installation of downloaded mods  
 Beautiful Terminal Interface  
+Discord RPC  
   
   
 ### Known Issues
