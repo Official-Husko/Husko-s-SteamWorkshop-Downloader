@@ -3,7 +3,7 @@
 With this tool you can download and install mods from the SteamWorkshop Easily.
 This tool will download the file you entered via the steam workshop link and install it in the folder you configured.
 
-Don't Have python installed? No problem, you can grab the compiled exe in the Releases Section.
+Don't Have python installed? No problem, you can grab the compiled exe in the [Releases][2] Section.
 
 # <img src="https://i.imgur.com/o3m1vl5.gif"> 
 
@@ -32,3 +32,4 @@ More Bug Fixes
 Linux Support  
 
 [1]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/wiki
+[2]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest
