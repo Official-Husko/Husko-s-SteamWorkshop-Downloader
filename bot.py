@@ -13,18 +13,20 @@ from termcolor import colored
 from alive_progress import alive_bar
 import datetime
 import sys
+import re
 
 # Defined Variables
 global cfg
 cfg = configparser.RawConfigParser()
-version = "v1.3"
+version = "1.2"
 threads = 1
 get_date = datetime.datetime.now()
 month = get_date.month
 
-client_id = '945401698401284116'  # Put your Client ID here, this is a fake ID
-RPC = Presence(client_id)  # Initialize the Presence class
-RPC.connect()  # Start the handshake loop
+# Connect to Discord RPC
+client_id = '945401698401284116'
+RPC = Presence(client_id)
+RPC.connect()
 
 # Check if folder exists else create it
 if os.path.exists('temp'):
@@ -38,11 +40,60 @@ else:
 if not os.path.exists('configs'):
     os.makedirs('configs')
 
+# Checking for updates on startup
+def update_checker():
+    os.system('cls')
+    header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
+    git_up = "https://api.github.com/repos/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest"
+    latest = requests.get(git_up,headers={"User-Agent":header}).text
+    git_data = json.loads(latest)
+    cv = str(git_data.get('tag_name'))
+    u_info = str(git_data.get('body'))
+    dir_url = str(git_data['assets'][0]['browser_download_url'])
+    updt_name = str(git_data.get('name'))
+    updt_rel = str(git_data.get('published_at'))
+    if float(version) < float(cv):
+        RPC.update(state="Updating Downloader to " + cv,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Updating",small_image="update",large_image="bridge")
+        print(colored("A new Update is available!", "green"))
+        print("")
+        print("Name: " + colored(updt_name, "green"))
+        print("Version: " + colored(cv, "green"))
+        print("Released: " + colored(updt_rel.strip("tz"), "green"))
+        print("")
+        print("")
+        print("==================<[ " + colored("What's New ", "green") + "]>==================")
+        print(u_info)
+        print("")
+        sleep(3)
+        print("Download Update? (Y/n)")
+        fetch_u = input(">> ")
+        if fetch_u == "y" or fetch_u == "Y":
+            if not os.path.exists('update'):
+                os.makedirs('update')
+            fetch = requests.get(dir_url,headers={"User-Agent":header},stream=True)
+            file_path = os.path.join("update/","Huskos SteamWorkshop Downloader.exe")
+            file = open(file_path, 'wb')
+            with alive_bar(int(int(fetch.headers.get('content-length')) / 1024 + 1), title="Downloading Update") as bar:
+                for chunk in fetch.iter_content(chunk_size=1024):
+                    if chunk:
+                        file.write(chunk)
+                        file.flush()
+                        bar()
+                file.close()
+            print("")
+            print("The Update has been downloaded into the downloads folder in your directory. Once you are ready you can close the bot and replace the old exe with the new one. This will not delete any of the configs!")
+            sleep(5)
+            sys.exit(0)
+        else:
+            print("Proceeding to Downloader")
+            sleep(3)
+            proxy_scraper(cfg)
+
 # Set CMD Title
-ctypes.windll.kernel32.SetConsoleTitleW("Husko's Steam Workshop Downloader | " + version)
+ctypes.windll.kernel32.SetConsoleTitleW("Husko's Steam Workshop Downloader | v" + version)
 
 def game_selection(cfg):
-    RPC.update(state="Selecting a Game",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko"},],small_text="Game Selection",small_image="selection",large_image="bridge")
+    RPC.update(state="Selecting a Game",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Game Selection",small_image="selection",large_image="bridge")
     os.system('cls')
     print(colored("======================================================================================================================", "red"))
     print(colored("|                                                                                                                    |", "red"))
@@ -96,17 +147,17 @@ def config(cfg):
     print("Proxies Loaded: " + colored(str(len(proxy_list)), "green"))
     print("")
     print("Please Enter the Workshop Link")
-    RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
+    RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
     config2(cfg)
 
 
 def config2(cfg):
-    RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
+    RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
     global id
     global xid
     xid = input(colored(">> ", ))
-    xxid = xid.strip("https://steamcommunity.com/sharedfiles/filedetails/?id=")
-    id = xxid.strip("&searchtext=")
+    xxid = re.match(r"(.*\d+)", xid).group()
+    id = xxid.strip("https://steamcommunity.com/sharedfiles/filedetails/?id=")
     if id.isnumeric() == False:
         print(colored("Something Went Wrong! Either wrong workshop URL or another error.", "red"))
         sleep(5)
@@ -128,6 +179,10 @@ def downloader(cfg):
         page = requests.post(url,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=mod_id).text
     else:
         page = requests.post(url,headers={"User-Agent":header},timeout=timeout,data=mod_id).text
+    if page == "[]":
+        print(colored("Mod Not Found. If this seems to be a mistake please open an issue report.", "red"))
+        sleep(3)
+        config2(cfg)
     data = json.loads(page)
     for i in data:
             pubid = str(i.get('publishedfileid'))
@@ -135,11 +190,11 @@ def downloader(cfg):
             name = str(i.get('title'))
             app_id = str(i.get('creator_appid'))
     if int(app_id) != int(game):
-        print("You Tried to download a mod for a different game then you selected!")
+        print(colored("You Tried to download a mod for a different game then you selected!", "red"))
         sleep(3)
         game_selection(cfg)
     print("Downloading: " + colored(name, "green"))
-    RPC.update(details="Downloading " + name,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko"},{"label": "Mod Page", "url": "" + xid +""}],small_text="Stormworks: Build and Rescue",small_image="stormworks",large_image="bridge")
+    RPC.update(details="Downloading " + name,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},{"label": "Mod Page", "url": "" + xid +""}],small_text="Stormworks: Build and Rescue",small_image="stormworks",large_image="bridge")
     url2 = "https://" + bd + ".steamworkshopdownloader.io/prod/api/download/request"
     req_data = '{"publishedFileId":' + pubid + ',"collectionId":null,"hidden":false,"downloadFormat":"raw","autodownload":false}'
     if proxies == "yes":
@@ -182,10 +237,7 @@ def downloader(cfg):
         r = requests.get(url4,headers={"User-Agent":header},timeout=timeout,stream=True)
     file_path = os.path.join("temp/", safe_name + ".zip")
     file = open(file_path, 'wb')
-    style = "smooth"
-    if month == 10:
-        style = "halloween"
-    with alive_bar(int(int(r.headers.get('content-length')) / 1024 + 1),bar=style) as bar:
+    with alive_bar(int(int(r.headers.get('content-length')) / 1024 + 1)) as bar:
         for chunk in r.iter_content(chunk_size=1024):
             if chunk:
                 file.write(chunk)
@@ -365,7 +417,7 @@ def proxy_scraper(cfg):
     game_selection(cfg)
 
 if __name__ == '__main__':
-    proxy_scraper(cfg)
+    update_checker()
 
 # Credits
 #
