@@ -100,9 +100,8 @@ def game_selection(cfg):
     print(colored("======================================================================================================================", "red"))
     print(colored("|                                                                                                                    |", "red"))
     print(colored("|     " + colored("Product: Husko's Steam Workshop Downloader", "white") + colored("                                                                     |", "red"), "red"))
-    print(colored("|     " + colored("Version: ", "white") + version + colored("                                                                                                  |", "red"), "red"))
-    print(colored("|     " + colored("Description: Download and Install SteamWorkshop mods with 1 click. Works on Legit and Cracked Copies", "white") + colored("           |", "red"), "red"))
-    print(colored("|     " + colored("New: Multiple Game Support, Supported Games Display, Bug Fixes and a new config system", "white") + colored("                         |", "red"), "red"))
+    print(colored("|     " + colored("Version: ", "white") + version + colored("                                                                                                   |", "red"), "red"))
+    print(colored("|     " + colored("Description: Download and Install SteamWorkshop mods with a few simple click.", "white") + colored("                                  |", "red"), "red"))
     print(colored("|                                                                                                                    |", "red"))
     print(colored("======================================================================================================================", "red"))
     print("")
@@ -110,12 +109,18 @@ def game_selection(cfg):
     print("")
     print("Please Enter a App ID")
     global game
-    game = int(input(">> "))
+    try:
+        game = int(input(">> "))
+    except ValueError:
+        print(colored("Please enter a correct App ID", "red"))
+        sleep(3)
+        game_selection(cfg)
     if game in supported_games:
         check_config(cfg)
     else:
-        print("Invalid App ID entered!")
-        sleep(3)
+        print("")
+        print(colored("Game is not Supported Sorry. Please open a request for me to add support to this game.", "yellow"))
+        sleep(5)
         game_selection(cfg)
 
 def config(cfg):
@@ -124,8 +129,7 @@ def config(cfg):
     print(colored("|                                                                                                                    |", "red"))
     print(colored("|     " + colored("Product: Husko's Steam Workshop Downloader", "white") + colored("                                                                     |", "red"), "red"))
     print(colored("|     " + colored("Version: ", "white") + version + colored("                                                                                                  |", "red"), "red"))
-    print(colored("|     " + colored("Description: Download and Install SteamWorkshop mods with 1 click. Works on Legit and Cracked Copies", "white") + colored("           |", "red"), "red"))
-    print(colored("|     " + colored("New: Multiple Game Support, Supported Games Display, Bug Fixes and a new config system", "white") + colored("                         |", "red"), "red"))
+    print(colored("|     " + colored("Description: Download and Install SteamWorkshop mods with a few simple click.", "white") + colored("                                  |", "red"), "red"))
     print(colored("|                                                                                                                    |", "red"))
     print(colored("======================================================================================================================", "red"))
     print("")
