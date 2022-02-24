@@ -81,13 +81,15 @@ def update_checker():
                         bar()
                 file.close()
             print("")
-            print("The Update has been downloaded into the downloads folder in your directory. Once you are ready you can close the bot and replace the old exe with the new one. This will not delete any of the configs!")
+            print("The Update has been downloaded into the update folder in your directory. the bot will close so you can replace the old exe with the new one. This will not delete any of the configs!")
             sleep(5)
             sys.exit(0)
         else:
             print("Proceeding to Downloader")
             sleep(3)
             proxy_scraper(cfg)
+    else:
+        proxy_scraper(cfg)
 
 # Set CMD Title
 ctypes.windll.kernel32.SetConsoleTitleW("Husko's Steam Workshop Downloader | v" + version)
