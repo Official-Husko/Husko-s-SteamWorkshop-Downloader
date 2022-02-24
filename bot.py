@@ -18,7 +18,7 @@ import re
 # Defined Variables
 global cfg
 cfg = configparser.RawConfigParser()
-version = "1.2"
+version = "1.4"
 threads = 1
 get_date = datetime.datetime.now()
 month = get_date.month
