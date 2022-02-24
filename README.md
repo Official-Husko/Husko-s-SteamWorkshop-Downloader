@@ -20,8 +20,8 @@ Discord RPC
   
   
 ### Known Issues
-Entering an invalid id will make the bot crash  
-if you enter a link make sure it looks like this https://steamcommunity.com/sharedfiles/filedetails/?id=2674456883 or it will crash  
+~Entering an invalid id will make the bot crash~  Fixed in 1.4  
+~if you enter a link make sure it looks like this https://steamcommunity.com/sharedfiles/filedetails/?id=2674456883 or it will crash~ Fixed in 1.4  
   
   
 ### Planned  
