@@ -115,6 +115,7 @@ def game_selection(cfg):
     print("")
     print("Please Enter a App ID")
     global game
+    global not_supported
     try:
         game = int(input(">> "))
     except ValueError:
@@ -122,12 +123,14 @@ def game_selection(cfg):
         sleep(3)
         game_selection(cfg)
     if game in supported_games:
+        not_supported = False
         check_config(cfg)
     else:
         print("")
-        print(colored("Game is not Supported Sorry. Please open a request for me to add support to this game.", "yellow"))
-        sleep(5)
-        game_selection(cfg)
+        print(colored("This game has not yet received a special installation instruction in this Tool. I will be downloaded but it won't be installed automatically!", "yellow"))
+        sleep(7)
+        not_supported = True
+        config(cfg)
 
 def config(cfg):
     os.system('cls')
@@ -139,20 +142,29 @@ def config(cfg):
     print(colored("|                                                                                                                    |", "red"))
     print(colored("======================================================================================================================", "red"))
     print("")
-    configFilePath = "configs/" + config_names.get(game) + "_config.ini"
-    cfg.read(configFilePath)
     global mods
-    mods = cfg.get('Default', 'ModsPath')
     global proxies
-    proxies = cfg.get('Default', 'Proxies')
     global rua
-    rua = cfg.get('Default', 'RandomUserAgent')
     global timeout
-    timeout = cfg.getint('Default', 'TimeOut')
-    print("-----------<[ Using the Following Config: " + config_names.get(game) + "_config.ini ]>-----------")
-    print("Game: " + colored(game_names.get(game), "green"))
-    print("App ID: " + colored(game, "green"))
-    print("Mods Path: " + colored(mods, "green"))
+    if not_supported == False:
+        print("-----------<[ Using the Following Config: " + config_names.get(game) + "_config.ini ]>-----------")
+        configFilePath = "configs/" + config_names.get(game) + "_config.ini"
+        cfg.read(configFilePath)
+        mods = cfg.get('Default', 'ModsPath')
+        proxies = cfg.get('Default', 'Proxies')
+        rua = cfg.get('Default', 'RandomUserAgent')
+        timeout = cfg.getint('Default', 'TimeOut')
+        print("Game: " + colored(game_names.get(game), "green"))
+        print("App ID: " + colored(game, "green"))
+        print("Mods Path: " + colored(mods, "green"))
+    else:
+        print("-----------<[ Using the Following Config: default_config.ini ]>-----------")
+        print("Game: " + colored("Unknown", "green"))
+        print("App ID: " + colored(game, "green"))
+        print("Mods Path: " + colored("Manual Installation", "green"))
+        timeout = 10
+        proxies = "yes"
+        rua = "yes"
     print("Gather & Use Proxies: " + colored(proxies, "green"))
     print("Randomize User-Agents: " + colored(rua, "green"))
     print("Connection TimeOut: " + colored(str(timeout) + " Seconds", "green"))
@@ -169,7 +181,7 @@ def config2(cfg):
         RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
     global id
     global xid
-    xid = input(colored(">> ", ))
+    xid = input(">> ")
     if "https://steamcommunity.com/workshop/filedetails/?id=" in xid:
         xxid = xid.strip("https://steamcommunity.com/workshop/filedetails/?id=")
     elif "https://steamcommunity.com/sharedfiles/filedetails/?id=" in xid:
@@ -213,10 +225,11 @@ def downloader(cfg):
                 fil_name = str(i.get('filename'))
                 name = str(i.get('title'))
                 app_id = str(i.get('consumer_appid'))
+                dformat = str(i.get('download_format'))
                 coll = str(i.get('children'))
         if coll != "None" and fil_name != "None" and int(len(collection)) <= 1:
-            if int(len(collection)) <= 1 and ".png" or ".jpg" or ".jpeg" in fil_name:
-                collection.clear()
+            """if int(len(collection)) <= 1 and ".png" or ".jpg" or ".jpeg" in fil_name:
+                collection.clear()""" # Stripped the id out after it "detected" it as a collection but is disabled due to not working as intended
             fcoll = coll.replace("'",'"')
             cdata = json.loads(fcoll)
             for g in cdata:
@@ -238,7 +251,7 @@ def downloader(cfg):
         if discord_active == 1:
             RPC.update(details="Downloading " + name,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},{"label": "Mod Page", "url": "" + xid +""}],small_text="Stormworks: Build and Rescue",small_image="stormworks",large_image="bridge")
         url2 = "https://" + bd + ".steamworkshopdownloader.io/prod/api/download/request"
-        req_data = '{"publishedFileId":' + pubid + ',"collectionId":null,"hidden":false,"downloadFormat":"raw","autodownload":false}'
+        req_data = '{"publishedFileId":' + pubid + ',"collectionId":null,"hidden":false,"downloadFormat":"' + dformat + '","autodownload":false}'
         if proxies == "yes":
             proxy = random.choice(proxy_list)
             proxyy = {"http":proxy}
@@ -296,6 +309,11 @@ def downloader(cfg):
                 print(colored("Received Corrupt Zip File. Try to download the mod again. If the issue persists try to open it manually and if it works report this issue to the mod author else the server sent a corrupt file.", "red"))
                 badzip = True
         os.remove("temp/" + safe_name + ".zip")
+        if not_supported == True:
+            print("You can now proceed to manually install the mod " + colored(name, "green") + " located in the temp folder.")
+            print("")
+            collection.clear()
+            config2(cfg)
 
         # Stormworks: Build and Rescue
         if int(game) == 573090:
