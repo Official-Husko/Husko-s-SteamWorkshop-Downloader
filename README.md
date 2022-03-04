@@ -11,25 +11,44 @@ The bot will ask for an app_id of the game you want to download mods for. This i
   
 Other Infos can be found on the [Wiki][1]!
 
+<br>
+
 ## Current Features  
 Proxy Scraper: to anonymize request  
 Randomized User Agent to Further Anonymize request sent  
 Automatic installation of downloaded mods  
-Beautiful Terminal Interface  
+Beautiful Terminal Interface*  
 Discord RPC  
-  
-  
+Update Grabber  
+Collection Support  
+Grabs Dependencies  
+
+<br>
+
 ### Known Issues
-~Entering an invalid id will make the bot crash~  Fixed in 1.4  
-~if you enter a link make sure it looks like this https://steamcommunity.com/sharedfiles/filedetails/?id=2674456883 or it will crash~ Fixed in 1.4  
+~~Entering an invalid id will make the bot crash~~  ***Fixed in 1.4***  
+~~if you enter a link make sure it looks like this https://steamcommunity.com/sharedfiles/filedetails/?id=2674456883 or it will crash~~ ***Fixed in 1.4***  
+~~Bot Will Crash when discord is not running.~~ ***Fixed in 1.5***  
+Certain Collections may throw an installation error. This can be safely ignored for now.  
   
-  
+<br>
+
 ### Planned  
-Feature to download collections  
-Feature to download from a file  
+~~Feature to download collections~~ ***Added in 1.5***    
+Feature to download from a text file  
 Adding More Games to the supported list  
 More Bug Fixes  
 Linux Support  
+A real auto updater  
+Adding an API to communicate with a browser addon  
+Code Cleanup    
+<br>
+#
 
 [1]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/wiki
 [2]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest
+[3]: https://steamworkshopdownloader.io/
+
+#### Disclaimer  
+***We are not in any way affiliated or working with the team from [Steam Workshop Downloader IO][3]. This is a unofficial project.***  
+*I would suggest you to use a customized Windows Terminal.

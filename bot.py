@@ -1,5 +1,6 @@
 from socket import timeout
 from time import sleep
+from tkinter import E
 import requests
 import random
 import ctypes
@@ -18,15 +19,20 @@ import re
 # Defined Variables
 global cfg
 cfg = configparser.RawConfigParser()
-version = "1.4"
+version = "1.5"
 threads = 1
 get_date = datetime.datetime.now()
 month = get_date.month
+collection = []
 
 # Connect to Discord RPC
 client_id = '945401698401284116'
-RPC = Presence(client_id)
-RPC.connect()
+try:
+    RPC = Presence(client_id)
+    RPC.connect()
+    discord_active = 1
+except:
+    discord_active = 0
 
 # Check if folder exists else create it
 if os.path.exists('temp'):
@@ -34,8 +40,6 @@ if os.path.exists('temp'):
     os.makedirs('temp')
 elif not os.path.exists('temp'):
     os.makedirs('temp')
-else:
-    print("Error while checking for temp folder. Please report this issue")
 
 if not os.path.exists('configs'):
     os.makedirs('configs')
@@ -53,7 +57,8 @@ def update_checker():
     updt_name = str(git_data.get('name'))
     updt_rel = str(git_data.get('published_at'))
     if float(version) < float(cv):
-        RPC.update(state="Updating Downloader to " + cv,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Updating",small_image="update",large_image="bridge")
+        if discord_active == 1:
+            RPC.update(state="Updating Downloader to " + cv,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Updating",small_image="update",large_image="bridge")
         print(colored("A new Update is available!", "green"))
         print("")
         print("Name: " + colored(updt_name, "green"))
@@ -95,13 +100,14 @@ def update_checker():
 ctypes.windll.kernel32.SetConsoleTitleW("Husko's Steam Workshop Downloader | v" + version)
 
 def game_selection(cfg):
-    RPC.update(state="Selecting a Game",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Game Selection",small_image="selection",large_image="bridge")
+    if discord_active == 1:
+        RPC.update(state="Selecting a Game",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Game Selection",small_image="selection",large_image="bridge")
     os.system('cls')
     print(colored("======================================================================================================================", "red"))
     print(colored("|                                                                                                                    |", "red"))
-    print(colored("|     " + colored("Product: Husko's Steam Workshop Downloader", "white") + colored("                                                                     |", "red"), "red"))
-    print(colored("|     " + colored("Version: ", "white") + version + colored("                                                                                                   |", "red"), "red"))
-    print(colored("|     " + colored("Description: Download and Install SteamWorkshop mods with a few simple click.", "white") + colored("                                  |", "red"), "red"))
+    print(colored("|     " + colored("Product: ", "white") + colored("Husko's Steam Workshop Downloader", "green") + colored("                                                                     |", "red"), "red"))
+    print(colored("|     " + colored("Version: ", "white") + colored(version, "green") + colored("                                                                                                   |", "red"), "red"))
+    print(colored("|     " + colored("Description: ", "white") + colored("Download and Install SteamWorkshop mods with a few simple clicks.", "green") + colored("                                 |", "red"), "red"))
     print(colored("|                                                                                                                    |", "red"))
     print(colored("======================================================================================================================", "red"))
     print("")
@@ -109,6 +115,7 @@ def game_selection(cfg):
     print("")
     print("Please Enter a App ID")
     global game
+    global not_supported
     try:
         game = int(input(">> "))
     except ValueError:
@@ -116,113 +123,145 @@ def game_selection(cfg):
         sleep(3)
         game_selection(cfg)
     if game in supported_games:
+        not_supported = False
         check_config(cfg)
     else:
         print("")
-        print(colored("Game is not Supported Sorry. Please open a request for me to add support to this game.", "yellow"))
-        sleep(5)
-        game_selection(cfg)
+        print(colored("This game has not yet received a special installation instruction in this Tool. I will be downloaded but it won't be installed automatically!", "yellow"))
+        sleep(7)
+        not_supported = True
+        config(cfg)
 
 def config(cfg):
     os.system('cls')
     print(colored("======================================================================================================================", "red"))
     print(colored("|                                                                                                                    |", "red"))
     print(colored("|     " + colored("Product: Husko's Steam Workshop Downloader", "white") + colored("                                                                     |", "red"), "red"))
-    print(colored("|     " + colored("Version: ", "white") + version + colored("                                                                                                  |", "red"), "red"))
-    print(colored("|     " + colored("Description: Download and Install SteamWorkshop mods with a few simple click.", "white") + colored("                                  |", "red"), "red"))
+    print(colored("|     " + colored("Version: ", "white") + version + colored("                                                                                                   |", "red"), "red"))
+    print(colored("|     " + colored("Description: Download and Install SteamWorkshop mods with a few simple clicks.", "white") + colored("                                 |", "red"), "red"))
     print(colored("|                                                                                                                    |", "red"))
     print(colored("======================================================================================================================", "red"))
     print("")
-    configFilePath = "configs/" + config_names.get(game) + "_config.ini"
-    cfg.read(configFilePath)
     global mods
-    mods = cfg.get('Default', 'ModsPath')
     global proxies
-    proxies = cfg.get('Default', 'Proxies')
     global rua
-    rua = cfg.get('Default', 'RandomUserAgent')
     global timeout
-    timeout = cfg.getint('Default', 'TimeOut')
-    print("-----------<[ Using the Following Config: " + config_names.get(game) + "_config.ini ]>-----------")
-    print("Game: " + colored(game_names.get(game), "green"))
-    print("App ID: " + colored(game, "green"))
-    print("Mods Path: " + colored(mods, "green"))
+    if not_supported == False:
+        print("-----------<[ Using the Following Config: " + config_names.get(game) + "_config.ini ]>-----------")
+        configFilePath = "configs/" + config_names.get(game) + "_config.ini"
+        cfg.read(configFilePath)
+        mods = cfg.get('Default', 'ModsPath')
+        proxies = cfg.get('Default', 'Proxies')
+        rua = cfg.get('Default', 'RandomUserAgent')
+        timeout = cfg.getint('Default', 'TimeOut')
+        print("Game: " + colored(game_names.get(game), "green"))
+        print("App ID: " + colored(game, "green"))
+        print("Mods Path: " + colored(mods, "green"))
+    else:
+        print("-----------<[ Using the Following Config: default_config.ini ]>-----------")
+        print("Game: " + colored("Unknown", "green"))
+        print("App ID: " + colored(game, "green"))
+        print("Mods Path: " + colored("Manual Installation", "green"))
+        timeout = 10
+        proxies = "yes"
+        rua = "yes"
     print("Gather & Use Proxies: " + colored(proxies, "green"))
     print("Randomize User-Agents: " + colored(rua, "green"))
     print("Connection TimeOut: " + colored(str(timeout) + " Seconds", "green"))
     print("Proxies Loaded: " + colored(str(len(proxy_list)), "green"))
     print("")
     print("Please Enter the Workshop Link")
-    RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
+    if discord_active == 1:
+        RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
     config2(cfg)
 
 
 def config2(cfg):
-    RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
+    if discord_active == 1:
+        RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
     global id
     global xid
-    xid = input(colored(">> ", ))
-    xxid = re.match(r"(.*\d+)", xid).group()
-    id = xxid.strip("https://steamcommunity.com/sharedfiles/filedetails/?id=")
-    if id.isnumeric() == False:
+    xid = input(">> ")
+    if "https://steamcommunity.com/workshop/filedetails/?id=" in xid:
+        xxid = xid.strip("https://steamcommunity.com/workshop/filedetails/?id=")
+    elif "https://steamcommunity.com/sharedfiles/filedetails/?id=" in xid:
+        xxid = xid.strip("https://steamcommunity.com/sharedfiles/filedetails/?id=")
+    else:
         print(colored("Something Went Wrong! Either wrong workshop URL or another error.", "red"))
         sleep(5)
         config2(cfg)
+    id = re.match(r"(.*\d+)", xxid).group()
+    if id.isnumeric() == False:
+        print(colored("Something Went Wrong! Either wrong workshop URL or another error.", "red"))
+        sleep(3)
+        config2(cfg)
     else:
+        collection.append(id)
         downloader(cfg)
 
 def downloader(cfg):
-    backend = ["node01","node02","node03","node04","node05"]
-    bd = random.choice(backend)
-    header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
-    url = "https://" + bd + ".steamworkshopdownloader.io/prod/api/details/file"
-    mod_id = "[" + id + "]"
-    if rua == "yes":
-        header = random.choice(user_agents)
-    if proxies == "yes":
-        proxy = random.choice(proxy_list)
-        proxyy = {"http":proxy}
-        page = requests.post(url,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=mod_id).text
-    else:
-        page = requests.post(url,headers={"User-Agent":header},timeout=timeout,data=mod_id).text
-    if page == "[]":
-        print(colored("Mod Not Found. If this seems to be a mistake please open an issue report.", "red"))
-        sleep(3)
-        config2(cfg)
-    data = json.loads(page)
-    for i in data:
-            pubid = str(i.get('publishedfileid'))
-            safe_name = str(i.get('title_disk_safe'))
-            name = str(i.get('title'))
-            app_id = str(i.get('creator_appid'))
-    if int(app_id) != int(game):
-        print(colored("You Tried to download a mod for a different game then you selected!", "red"))
-        sleep(3)
-        game_selection(cfg)
-    print("Downloading: " + colored(name, "green"))
-    RPC.update(details="Downloading " + name,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},{"label": "Mod Page", "url": "" + xid +""}],small_text="Stormworks: Build and Rescue",small_image="stormworks",large_image="bridge")
-    url2 = "https://" + bd + ".steamworkshopdownloader.io/prod/api/download/request"
-    req_data = '{"publishedFileId":' + pubid + ',"collectionId":null,"hidden":false,"downloadFormat":"raw","autodownload":false}'
-    if proxies == "yes":
-        proxy = random.choice(proxy_list)
-        proxyy = {"http":proxy}
-        page2 = requests.post(url2,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=req_data).text
-    else:
-        page2 = requests.post(url2,headers={"User-Agent":header},timeout=timeout,data=req_data).text
-    data2 = json.loads(page2)
-    uuid = data2.get('uuid')
-    url3 = "https://" + bd + ".steamworkshopdownloader.io/prod/api/download/status"
-    check = '{"uuids":["' + uuid + '"]}'
-    if proxies == "yes":
-        proxy = random.choice(proxy_list)
-        proxyy = {"http":proxy}
-        page3 = requests.post(url3,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=check).text
-    else:
-        page3 = requests.post(url3,headers={"User-Agent":header},timeout=timeout,data=check).text
-    data3 = json.loads(page3)
-    status = data3[uuid]['status']
-    while status != "prepared":
-        sleep(2)
+    for id in collection:
+        backend = ["node01","node02","node03","node04","node05"]
+        bd = random.choice(backend)
+        header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
+        url = "https://" + bd + ".steamworkshopdownloader.io/prod/api/details/file"
+        mod_id = "[" + id + "]"
+        if rua == "yes":
+            header = random.choice(user_agents)
+        if proxies == "yes":
+            proxy = random.choice(proxy_list)
+            proxyy = {"http":proxy}
+            page = requests.post(url,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=mod_id).text
+        else:
+            page = requests.post(url,headers={"User-Agent":header},timeout=timeout,data=mod_id).text
+        if page == "[]":
+            print(colored("Mod Not Found. If this seems to be a mistake please open an issue report.", "red"))
+            sleep(3)
+            config2(cfg)
+        data = json.loads(page)
+        for i in data:
+                pubid = str(i.get('publishedfileid'))
+                safe_name = str(i.get('title_disk_safe'))
+                fil_name = str(i.get('filename'))
+                name = str(i.get('title'))
+                app_id = str(i.get('consumer_appid'))
+                dformat = str(i.get('download_format'))
+                coll = str(i.get('children'))
+        if coll != "None" and fil_name != "None" and int(len(collection)) <= 1:
+            """if int(len(collection)) <= 1 and ".png" or ".jpg" or ".jpeg" in fil_name:
+                collection.clear()""" # Stripped the id out after it "detected" it as a collection but is disabled due to not working as intended
+            fcoll = coll.replace("'",'"')
+            cdata = json.loads(fcoll)
+            for g in cdata:
+                tidd = str(g.get('publishedfileid'))
+                collection.append(tidd)
+            amount = str(len(collection))
+            if ".png" or ".jpg" or ".jpeg" in fil_name:
+                print("Downloading Collection: " + colored(name, "green") + " with " + colored(str(len(collection)), "green") + " Mods")
+                print("")
+            downloader(cfg)
+        amount = str(len(collection))
+        if int(amount) <= 1:
+            collection.clear()
+        if int(app_id) != int(game):
+            print(colored("You Tried to download a mod for a different game then you selected!", "red"))
+            sleep(3)
+            game_selection(cfg)
+        print("Downloading: " + colored(name, "green"))
+        if discord_active == 1:
+            RPC.update(details="Downloading " + name,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},{"label": "Mod Page", "url": "" + xid +""}],small_text="Stormworks: Build and Rescue",small_image="stormworks",large_image="bridge")
+        url2 = "https://" + bd + ".steamworkshopdownloader.io/prod/api/download/request"
+        req_data = '{"publishedFileId":' + pubid + ',"collectionId":null,"hidden":false,"downloadFormat":"' + dformat + '","autodownload":false}'
+        if proxies == "yes":
+            proxy = random.choice(proxy_list)
+            proxyy = {"http":proxy}
+            page2 = requests.post(url2,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=req_data).text
+        else:
+            page2 = requests.post(url2,headers={"User-Agent":header},timeout=timeout,data=req_data).text
+        data2 = json.loads(page2)
+        uuid = data2.get('uuid')
+        url3 = "https://" + bd + ".steamworkshopdownloader.io/prod/api/download/status"
+        check = '{"uuids":["' + uuid + '"]}'
         if proxies == "yes":
             proxy = random.choice(proxy_list)
             proxyy = {"http":proxy}
@@ -231,76 +270,38 @@ def downloader(cfg):
             page3 = requests.post(url3,headers={"User-Agent":header},timeout=timeout,data=check).text
         data3 = json.loads(page3)
         status = data3[uuid]['status']
-    data4 = json.loads(page3)
-    node = data4[uuid]['storageNode']
-    spath = data4[uuid]['storagePath']
-    url4 = "https://" + node + "/prod//storage/" + spath + "?uuid=" + uuid
-    if os.path.exists("temp/" + safe_name + ".zip"):
-        os.remove("temp/" + safe_name + ".zip")
-    if proxies == "yes":
-        r = requests.get(url4,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,stream=True)
-    else:
-        r = requests.get(url4,headers={"User-Agent":header},timeout=timeout,stream=True)
-    file_path = os.path.join("temp/", safe_name + ".zip")
-    file = open(file_path, 'wb')
-    with alive_bar(int(int(r.headers.get('content-length')) / 1024 + 1)) as bar:
-        for chunk in r.iter_content(chunk_size=1024):
-            if chunk:
-                file.write(chunk)
-                file.flush()
-                bar()
-    file.close()
-    if int(game) == 573090:
-        if os.path.exists("temp/" + safe_name + ".xml"):
-            os.remove("temp/" + safe_name + ".xml")
-        if os.path.exists("temp/" + safe_name + ".png"):
-            os.remove("temp/" + safe_name + ".png")
-        zip = "temp/" + safe_name + '.zip'
-        destination = 'temp/'
-        with zipfile.ZipFile(zip) as zf:
-            try:
-                zf.extractall(destination)
-            except zipfile.BadZipFile:
-                print(colored("Received Corrupt Zip File. Try to download the mod again. If the issue persists try to open it manually and if it works report this issue to the mod author else the server sent a corrupt file.", "red"))
-                badzip = True
-        os.remove("temp/" + safe_name + ".zip")
-        if os.path.exists("temp/vehicle.xml") & os.path.exists("temp/workshop_preview.png"):
-            mod_path = mods + "/vehicles/"
-            if not os.path.exists(mod_path):
-                os.makedirs(mod_path)
-            os.rename("temp/vehicle.xml", "temp/" + safe_name + ".xml")
-            os.rename("temp/workshop_preview.png", "temp/" + safe_name + ".png")
-            source_dir = 'temp/'
-            file_names = os.listdir(source_dir)
-            if os.path.exists(mod_path + safe_name + ".xml"):
-                os.remove(mod_path + safe_name + ".xml")
-            if os.path.exists(mod_path + safe_name + ".png"):
-                os.remove(mod_path + safe_name + ".png")
-            for file_name in file_names:
-                shutil.move(os.path.join("temp/", file_name), mod_path)
-        elif os.path.exists("temp/playlist") & os.path.exists("temp/workshop_preview.png"):
-            mod_path = mods + "/missions/"
-            if not os.path.exists(mod_path):
-                os.makedirs(mod_path)
-            os.rename("temp/playlist", "temp/" + safe_name)
-            os.rename("temp/workshop_preview.png", "temp/" + safe_name + ".png")
-            source_dir = 'temp/'
-            file_names = os.listdir(source_dir)
-            if os.path.exists(mod_path + safe_name):
-                shutil.rmtree(mod_path + safe_name, ignore_errors=True)
-            if os.path.exists(mod_path + safe_name + ".png"):
-                os.remove(mod_path + safe_name + ".png")
-            for file_name in file_names:
-                shutil.move(os.path.join("temp/", file_name), mod_path)
-        else:
-            if badzip == True:
-                fuck = "yes"
+        while status != "prepared":
+            sleep(2)
+            if proxies == "yes":
+                proxy = random.choice(proxy_list)
+                proxyy = {"http":proxy}
+                page3 = requests.post(url3,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=check).text
             else:
-                print(colored("An Error occured while installing the mod! Please check your Mods Folder Path. If the issue persists please report this issue to the author", "red"))    
-    elif int(game) == 108600:
-        mod_path = mods + "/mods/"
+                page3 = requests.post(url3,headers={"User-Agent":header},timeout=timeout,data=check).text
+            data3 = json.loads(page3)
+            status = data3[uuid]['status']
+        data4 = json.loads(page3)
+        node = data4[uuid]['storageNode']
+        spath = data4[uuid]['storagePath']
+        url4 = "https://" + node + "/prod//storage/" + spath + "?uuid=" + uuid
+        if os.path.exists("temp/" + safe_name + ".zip"):
+            os.remove("temp/" + safe_name + ".zip")
+        if proxies == "yes":
+            r = requests.get(url4,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,stream=True)
+        else:
+            r = requests.get(url4,headers={"User-Agent":header},timeout=timeout,stream=True)
+        file_path = os.path.join("temp/", safe_name + ".zip")
+        file = open(file_path, 'wb')
+        with alive_bar(int(int(r.headers.get('content-length')) / 1024 + 1)) as bar:
+            for chunk in r.iter_content(chunk_size=1024):
+                if chunk:
+                    file.write(chunk)
+                    file.flush()
+                    bar()
+        file.close()
         zip = "temp/" + safe_name + '.zip'
-        destination = 'temp/'
+        destination = 'temp/' + safe_name
+        badzip = False
         with zipfile.ZipFile(zip) as zf:
             try:
                 zf.extractall(destination)
@@ -308,15 +309,94 @@ def downloader(cfg):
                 print(colored("Received Corrupt Zip File. Try to download the mod again. If the issue persists try to open it manually and if it works report this issue to the mod author else the server sent a corrupt file.", "red"))
                 badzip = True
         os.remove("temp/" + safe_name + ".zip")
-        source_dir = 'temp/mods'
-        file_names = os.listdir(source_dir)
-        for file_name in file_names:
-            shutil.rmtree(mod_path + file_name, ignore_errors=True)
-            shutil.move(os.path.join("temp/mods", file_name), mod_path)
-    else:
-        print("Couldn't Determine mod while installing. Please report this issue to the dev")
-    print("Mod " + colored(name, "green") + " Successfully Installed!")
-    print("")
+        if not_supported == True:
+            print("You can now proceed to manually install the mod " + colored(name, "green") + " located in the temp folder.")
+            print("")
+            collection.clear()
+            config2(cfg)
+
+        # Stormworks: Build and Rescue
+        if int(game) == 573090:
+
+            # Installing Vehicles
+            if os.path.exists(destination + "/vehicle.xml") & os.path.exists(destination + "/workshop_preview.png"):
+                mod_path = mods + "/vehicles/"
+                if not os.path.exists(mod_path):
+                    os.makedirs(mod_path)
+                os.rename(destination + "/vehicle.xml", destination + "/" + safe_name + ".xml")
+                os.rename(destination + "/workshop_preview.png", destination + "/" + safe_name + ".png")
+                file_names = os.listdir(destination)
+                if os.path.exists(mod_path + safe_name + ".xml"):
+                    os.remove(mod_path + safe_name + ".xml")
+                if os.path.exists(mod_path + safe_name + ".png"):
+                    os.remove(mod_path + safe_name + ".png")
+                for file_name in file_names:
+                    shutil.move(os.path.join(destination, file_name), mod_path)
+
+             # Installing Addons
+            elif os.path.exists(destination + "/playlist") & os.path.exists(destination + "/workshop_preview.png"):
+                mod_path = mods + "/missions/"
+                if not os.path.exists(mod_path):
+                    os.makedirs(mod_path)
+                os.rename(destination + "/playlist", destination + "/" + safe_name)
+                os.rename(destination + "/workshop_preview.png", destination + "/" + safe_name + ".png")
+                file_names = os.listdir(destination)
+                if os.path.exists(mod_path + safe_name):
+                    shutil.rmtree(mod_path + safe_name, ignore_errors=True)
+                if os.path.exists(mod_path + safe_name + ".png"):
+                    os.remove(mod_path + safe_name + ".png")
+                for file_name in file_names:
+                    shutil.move(os.path.join(destination, file_name), mod_path)
+
+        # Project Zomboid
+        elif int(game) == 108600:
+            mod_path = mods + "/mods/"
+            file_names = os.listdir(destination + '/mods')
+            for file_name in file_names:
+                shutil.rmtree(mod_path + file_name, ignore_errors=True)
+                shutil.move(os.path.join(destination + '/mods', file_name), mod_path)
+        
+        # Hunt and Snare
+        elif int(game) == 944330:
+            mod_path = mods + safe_name
+            if os.path.exists(mod_path):
+                shutil.rmtree(mod_path, ignore_errors=True)
+            source_dir = 'temp/'
+            file_names = os.listdir(source_dir)
+            for file_name in file_names:
+                shutil.move(os.path.join("temp/", file_name), mod_path)
+        
+        # Rimworld
+        elif int(game) == 294100:
+            mod_path = mods
+            if not os.path.exists(mod_path):
+                os.makedirs(mod_path)
+            source_dir = 'temp/'
+            file_names = os.listdir(source_dir)
+            shutil.rmtree(mod_path + "/" + safe_name, ignore_errors=True)
+            for file_name in file_names:
+                shutil.move(os.path.join("temp/", file_name), mod_path)
+
+        # Call to Arms - Gates of Hell: Ostfront
+        elif int(game) == 400750:
+            mod_path = mods + safe_name
+            if os.path.exists(mod_path):
+                shutil.rmtree(mod_path, ignore_errors=True)
+            source_dir = 'temp/'
+            file_names = os.listdir(source_dir)
+            for file_name in file_names:
+                shutil.move(os.path.join("temp/", file_name), mod_path)
+
+        else:
+            print("Couldn't Determine mod while installing. Please report this issue to the dev")
+        if badzip == True:
+            print("Mod " + colored(name, "red") + " Failed to Install!")
+        else: 
+            print("Mod " + colored(name, "green") + " Successfully Installed!")
+        print("")
+        shutil.rmtree('temp', ignore_errors=True)
+        os.makedirs('temp')
+    collection.clear()
     config2(cfg)
 
 user_agents = [
@@ -374,20 +454,27 @@ proxy_source_list = [
 
 supported_games = [
     573090,
-    108600
+    108600,
+    944330,
+    294100,
+    400750
 ]
 
 config_names = {
     573090: "stormworks",
-    108600: "pz"
+    108600: "pz",
+    944330: "hunt_snare",
+    294100: "rimworld",
+    400750: "cta_goh"
 }
 
 game_names = {
     573090: "Stormworks: Build and Rescue",
-    108600: "Project Zomboid"
+    108600: "Project Zomboid",
+    944330: "Hunt and Snare",
+    294100: "Rimworld",
+    400750: "Call to Arms - Gates of Hell: Ostfront"
 }
-
-
 
 # Check if the stormworks_config.ini exists else create it
 def check_config(cfg):
@@ -427,5 +514,5 @@ if __name__ == '__main__':
 
 # Credits
 #
-# h110m - Adding a fancy download bar
+# h110m - Helping and explaining on how to add a fancy download bar
 #
