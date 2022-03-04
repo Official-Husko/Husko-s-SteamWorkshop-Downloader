@@ -29,7 +29,7 @@ Grabs Dependencies
 ~~Entering an invalid id will make the bot crash~~  ***Fixed in 1.4***  
 ~~if you enter a link make sure it looks like this https://steamcommunity.com/sharedfiles/filedetails/?id=2674456883 or it will crash~~ ***Fixed in 1.4***  
 ~~Bot Will Crash when discord is not running.~~ ***Fixed in 1.5***  
-Certain Collection may throw an installation error. This can be safely ignored for now.  
+Certain Collections may throw an installation error. This can be safely ignored for now.  
   
 <br>
 
