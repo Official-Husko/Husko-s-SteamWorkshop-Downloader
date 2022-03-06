@@ -1,0 +1,55 @@
+{
+    "573090": {
+        "name": "Stormworks: Build and Rescue",
+        "short": "stormworks",
+        "req_folder": false,
+        "rename": [
+            "vehicle.xml",
+            "workshop_preview.png.png",
+            "playlist"
+        ],
+        "author": "Husko#5698"
+    },
+    "108600": {
+        "name": "Project Zomboid",
+        "short": "pz",
+        "req_folder": false,
+        "rename": [],
+        "author": "Husko#5698"
+    },
+    "944330": {
+        "name": "Hunt and Snare",
+        "short": "hunt_snare",
+        "req_folder": true,
+        "rename": [],
+        "author": "Husko#5698"
+    },
+    "294100": {
+        "name": "Rimworld",
+        "short": "rimworld",
+        "req_folder": true,
+        "rename": [],
+        "author": "Husko#5698"
+    },
+    "400750": {
+        "name": "Call to Arms - Gates of Hell: Ostfront",
+        "short": "cta_goh",
+        "req_folder": true,
+        "rename": [],
+        "author": "Husko#5698"
+    },
+    "824270": {
+        "name": "KovaaK's",
+        "short": "kovaaks",
+        "req_folder": false,
+        "rename": [],
+        "author": "Husko#5698"
+    },
+    "4000": {
+        "name": "Garry's Mod",
+        "short": "gmod",
+        "req_folder": false,
+        "rename": [],
+        "author": "Husko#5698"
+    }
+}

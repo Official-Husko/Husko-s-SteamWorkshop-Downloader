@@ -356,8 +356,8 @@ def downloader(cfg):
                 shutil.rmtree(mod_path + file_name, ignore_errors=True)
                 shutil.move(os.path.join(destination + '/mods', file_name), mod_path)
         
-        # Hunt and Snare
-        elif int(game) == 944330:
+        # Hunt and Snare & Call to Arms - Gates of Hell: Ostfront
+        elif int(game) == 944330 or 400750:
             mod_path = mods + safe_name
             if os.path.exists(mod_path):
                 shutil.rmtree(mod_path, ignore_errors=True)
@@ -457,7 +457,9 @@ supported_games = [
     108600,
     944330,
     294100,
-    400750
+    400750,
+    824270,
+    4000
 ]
 
 config_names = {
@@ -465,7 +467,9 @@ config_names = {
     108600: "pz",
     944330: "hunt_snare",
     294100: "rimworld",
-    400750: "cta_goh"
+    400750: "cta_goh",
+    824270: "kovaaks",
+    4000:   "gmod"
 }
 
 game_names = {
@@ -473,7 +477,9 @@ game_names = {
     108600: "Project Zomboid",
     944330: "Hunt and Snare",
     294100: "Rimworld",
-    400750: "Call to Arms - Gates of Hell: Ostfront"
+    400750: "Call to Arms - Gates of Hell: Ostfront",
+    824270: "KovaaK's",
+    4000:   "Garry's Mod"
 }
 
 # Check if the stormworks_config.ini exists else create it
