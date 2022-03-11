@@ -44,10 +44,23 @@ elif not os.path.exists('temp'):
 if not os.path.exists('configs'):
     os.makedirs('configs')
 
+chrome_win = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+firefox_lin = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:98.0) Gecko/20100101 Firefox/98.0"
+safari_osx = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15"
+    
 # Checking for updates on startup
 def update_checker():
     os.system('cls')
-    header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
+    import platform
+    op_sys = platform.system()
+    if op_sys == 'Windows':
+        header = "User-Agent':'"+chrome_win
+    elif op_sys == 'Darwin':
+        header = "User-Agent':'"+safari_osx
+    elif op_sys == 'Linux':
+        header = "User-Agent':'"+firefox_lin
+    else
+        header = "User-Agent':'"+chrome_win # we don't want to set no user agent if someone's using another OS
     git_up = "https://api.github.com/repos/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest"
     latest = requests.get(git_up,headers={"User-Agent":header}).text
     git_data = json.loads(latest)
