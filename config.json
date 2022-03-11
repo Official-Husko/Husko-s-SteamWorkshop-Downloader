@@ -1,0 +1,12 @@
+{
+    "app_settings": {
+        "updatechecker": "no",
+        "makemodlist": "no",
+        "use_proxies": "yes",
+        "randomuseragent": "yes",
+        "timeout": "10"
+    },
+    "game_paths": {
+        "stormworks": "C:\\Users\\Official Husko\\AppData\\Roaming\\Stormworks\\data"
+    }
+}

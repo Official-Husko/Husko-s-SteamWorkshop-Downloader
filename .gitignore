@@ -10,3 +10,8 @@ Huskos SteamWorkshop Downloader.spec
 configs/
 
 update/
+test.py
+
+.gitignore
+
+*.URL

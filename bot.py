@@ -19,7 +19,7 @@ import re
 # Defined Variables
 global cfg
 cfg = configparser.RawConfigParser()
-version = "1.5"
+version = "1.6"
 threads = 1
 get_date = datetime.datetime.now()
 month = get_date.month
@@ -44,54 +44,59 @@ elif not os.path.exists('temp'):
 if not os.path.exists('configs'):
     os.makedirs('configs')
 
+
+
 # Checking for updates on startup
 def update_checker():
-    os.system('cls')
-    header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
-    git_up = "https://api.github.com/repos/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest"
-    latest = requests.get(git_up,headers={"User-Agent":header}).text
-    git_data = json.loads(latest)
-    cv = str(git_data.get('tag_name'))
-    u_info = str(git_data.get('body'))
-    dir_url = str(git_data['assets'][0]['browser_download_url'])
-    updt_name = str(git_data.get('name'))
-    updt_rel = str(git_data.get('published_at'))
-    if float(version) < float(cv):
-        if discord_active == 1:
-            RPC.update(state="Updating Downloader to " + cv,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Updating",small_image="update",large_image="bridge")
-        print(colored("A new Update is available!", "green"))
-        print("")
-        print("Name: " + colored(updt_name, "green"))
-        print("Version: " + colored(cv, "green"))
-        print("Released: " + colored(updt_rel.strip("tz"), "green"))
-        print("")
-        print("")
-        print("==================<[ " + colored("What's New ", "green") + "]>==================")
-        print(u_info)
-        print("")
-        sleep(3)
-        print("Download Update? (Y/n)")
-        fetch_u = input(">> ")
-        if fetch_u == "y" or fetch_u == "Y":
-            if not os.path.exists('update'):
-                os.makedirs('update')
-            fetch = requests.get(dir_url,headers={"User-Agent":header},stream=True)
-            file_path = os.path.join("update/","Huskos SteamWorkshop Downloader.exe")
-            file = open(file_path, 'wb')
-            with alive_bar(int(int(fetch.headers.get('content-length')) / 1024 + 1), title="Downloading Update") as bar:
-                for chunk in fetch.iter_content(chunk_size=1024):
-                    if chunk:
-                        file.write(chunk)
-                        file.flush()
-                        bar()
-                file.close()
+    if check_for_updates == "yes":
+        os.system('cls')
+        header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
+        git_up = "https://api.github.com/repos/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest"
+        latest = requests.get(git_up,headers={"User-Agent":header}).text
+        git_data = json.loads(latest)
+        cv = str(git_data.get('tag_name'))
+        u_info = str(git_data.get('body'))
+        dir_url = str(git_data['assets'][0]['browser_download_url'])
+        updt_name = str(git_data.get('name'))
+        updt_rel = str(git_data.get('published_at'))
+        if float(version) < float(cv):
+            if discord_active == 1:
+                RPC.update(state="Updating Downloader to " + cv,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Updating",small_image="update",large_image="bridge")
+            print(colored("A new Update is available!", "green"))
             print("")
-            print("The Update has been downloaded into the update folder in your directory. the bot will close so you can replace the old exe with the new one. This will not delete any of the configs!")
-            sleep(5)
-            sys.exit(0)
-        else:
-            print("Proceeding to Downloader")
+            print("Name: " + colored(updt_name, "green"))
+            print("Version: " + colored(cv, "green"))
+            print("Released: " + colored(updt_rel.strip("tz"), "green"))
+            print("")
+            print("")
+            print("==================<[ " + colored("What's New ", "green") + "]>==================")
+            print(u_info)
+            print("")
             sleep(3)
+            print("Download Update? (Y/n)")
+            fetch_u = input(">> ")
+            if fetch_u == "y" or fetch_u == "Y":
+                if not os.path.exists('update'):
+                    os.makedirs('update')
+                fetch = requests.get(dir_url,headers={"User-Agent":header},stream=True)
+                file_path = os.path.join("update/","Huskos SteamWorkshop Downloader.exe")
+                file = open(file_path, 'wb')
+                with alive_bar(int(int(fetch.headers.get('content-length')) / 1024 + 1), title="Downloading Update") as bar:
+                    for chunk in fetch.iter_content(chunk_size=1024):
+                        if chunk:
+                            file.write(chunk)
+                            file.flush()
+                            bar()
+                    file.close()
+                print("")
+                print("The Update has been downloaded into the update folder in your directory. the bot will close so you can replace the old exe with the new one. This will not delete any of the configs!")
+                sleep(5)
+                sys.exit(0)
+            else:
+                print("Proceeding to Downloader")
+                sleep(3)
+                proxy_scraper(cfg)
+        else:
             proxy_scraper(cfg)
     else:
         proxy_scraper(cfg)
@@ -200,6 +205,13 @@ def config2(cfg):
         downloader(cfg)
 
 def downloader(cfg):
+    if create_mod_list == "yes":
+        print(create_mod_list)
+        counter = 0
+        filename = config_names.get(game) + "_modlist{}.txt"
+        while os.path.isfile(filename.format(counter)):
+            counter += 1
+        filename = filename.format(counter)
     for id in collection:
         backend = ["node01","node02","node03","node04","node05"]
         bd = random.choice(backend)
@@ -299,18 +311,23 @@ def downloader(cfg):
                     file.flush()
                     bar()
         file.close()
-        zip = "temp/" + safe_name + '.zip'
-        destination = 'temp/' + safe_name
+        if not_supported == True:
+            destination = 'manual/' + safe_name
+            if not os.path.exists('manual'):
+                os.makedirs('manual')
+        else:
+            destination = 'temp/' + safe_name
         badzip = False
+        zip = destination + '.zip'
         with zipfile.ZipFile(zip) as zf:
             try:
                 zf.extractall(destination)
             except zipfile.BadZipFile:
-                print(colored("Received Corrupt Zip File. Try to download the mod again. If the issue persists try to open it manually and if it works report this issue to the mod author else the server sent a corrupt file.", "red"))
+                print(colored("Received Corrupt Zip File. Try to download the mod again. If the issue persists try to open it manually and if it works report this issue to me on github else the server sent a corrupt file.", "red"))
                 badzip = True
         os.remove("temp/" + safe_name + ".zip")
         if not_supported == True:
-            print("You can now proceed to manually install the mod " + colored(name, "green") + " located in the temp folder.")
+            print("You can now proceed to manually install the mod " + colored(name, "green") + " located in the manual folder.")
             print("")
             collection.clear()
             config2(cfg)
@@ -351,13 +368,16 @@ def downloader(cfg):
         # Project Zomboid
         elif int(game) == 108600:
             mod_path = mods + "/mods/"
-            file_names = os.listdir(destination + '/mods')
-            for file_name in file_names:
-                shutil.rmtree(mod_path + file_name, ignore_errors=True)
-                shutil.move(os.path.join(destination + '/mods', file_name), mod_path)
-        
+            try:
+                file_names = os.listdir(destination + '/mods')
+                for file_name in file_names:
+                    shutil.rmtree(mod_path + file_name, ignore_errors=True)
+                    shutil.move(os.path.join(destination + '/mods', file_name), mod_path)
+            except:
+                yes = False
+            
         # Hunt and Snare & Call to Arms - Gates of Hell: Ostfront
-        elif int(game) == 944330 or 400750:
+        elif int(game) == 944330 or 400750 or 1118200:
             mod_path = mods + safe_name
             if os.path.exists(mod_path):
                 shutil.rmtree(mod_path, ignore_errors=True)
@@ -377,22 +397,14 @@ def downloader(cfg):
             for file_name in file_names:
                 shutil.move(os.path.join("temp/", file_name), mod_path)
 
-        # Call to Arms - Gates of Hell: Ostfront
-        elif int(game) == 400750:
-            mod_path = mods + safe_name
-            if os.path.exists(mod_path):
-                shutil.rmtree(mod_path, ignore_errors=True)
-            source_dir = 'temp/'
-            file_names = os.listdir(source_dir)
-            for file_name in file_names:
-                shutil.move(os.path.join("temp/", file_name), mod_path)
-
         else:
             print("Couldn't Determine mod while installing. Please report this issue to the dev")
         if badzip == True:
             print("Mod " + colored(name, "red") + " Failed to Install!")
         else: 
             print("Mod " + colored(name, "green") + " Successfully Installed!")
+            with open(config_names.get(game) + "_modlist.txt", "a") as wmf:
+                wmf.write(id + '\n')
         print("")
         shutil.rmtree('temp', ignore_errors=True)
         os.makedirs('temp')
@@ -459,7 +471,8 @@ supported_games = [
     294100,
     400750,
     824270,
-    4000
+    4000,
+    1118200
 ]
 
 config_names = {
@@ -469,7 +482,8 @@ config_names = {
     294100: "rimworld",
     400750: "cta_goh",
     824270: "kovaaks",
-    4000:   "gmod"
+    4000:   "gmod",
+    1118200: "people_pg"
 }
 
 game_names = {
@@ -479,7 +493,8 @@ game_names = {
     294100: "Rimworld",
     400750: "Call to Arms - Gates of Hell: Ostfront",
     824270: "KovaaK's",
-    4000:   "Garry's Mod"
+    4000:   "Garry's Mod",
+    1118200: "People Playground"
 }
 
 # Check if the stormworks_config.ini exists else create it
@@ -490,8 +505,6 @@ def check_config(cfg):
         cfg.set('Default', 'ModsPath', 'insert-path-here')
         cfg.set('Default', '# if proxies should be scraped and used', '')
         cfg.set('Default', 'Proxies', 'yes')
-        cfg.set('Default', '# Seconds Wait time for each request (Default 5)', '')
-        cfg.set('Default', 'WaitSeconds', '5')
         cfg.set('Default', '# Randomize User Agent', '')
         cfg.set('Default', 'RandomUserAgent', 'yes')
         cfg.set('Default', '# Request Timeout', '')
@@ -503,6 +516,29 @@ def check_config(cfg):
         sleep(5)
         sys.exit(0)
     config(cfg)
+
+# Checks for a global app config
+def app_cfg_checker(cfg):
+    if not os.path.exists("configs/app_config.ini"):
+        cfg.add_section('Default')
+        cfg.set('Default', '# Check if an update is available on each startup', '')
+        cfg.set('Default', 'UpdatesChecker', 'yes')
+        cfg.set('Default', '# Automatically Write Downloaded mods to a modlist', '')
+        cfg.set('Default', 'MakeModlist', 'yes')
+        with open(r"configs/app_config.ini", 'w') as configfile:
+            cfg.write(configfile)
+        configfile.close()
+        print("New App Config file was generated! Please configure it and then start the bot again")
+        sleep(5)
+        sys.exit(0)
+    else:
+        configFilePath = "configs/app_config.ini"
+        cfg.read(configFilePath)
+        global check_for_updates
+        check_for_updates = cfg.get('Default', 'UpdatesChecker')
+        global create_mod_list
+        create_mod_list = cfg.get('Default', 'MakeModlist')
+        update_checker()
 
 # scrape proxies from a given destination
 def proxy_scraper(cfg):
@@ -516,7 +552,7 @@ def proxy_scraper(cfg):
     game_selection(cfg)
 
 if __name__ == '__main__':
-    update_checker()
+    app_cfg_checker(cfg)
 
 # Credits
 #
