@@ -267,6 +267,7 @@ def downloader(cfg):
         if proxies == "yes":
             proxy = random.choice(proxy_list)
             proxyy = {"http":proxy}
+            print(proxyy)
             page2 = requests.post(url2,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=req_data).text
         else:
             page2 = requests.post(url2,headers={"User-Agent":header},timeout=timeout,data=req_data).text
@@ -557,4 +558,5 @@ if __name__ == '__main__':
 # Credits
 #
 # h110m - Helping and explaining on how to add a fancy download bar
+# Firecracker - Helping me solve a stupid issue that took longer than it should to solve. I'm sorry again
 #
