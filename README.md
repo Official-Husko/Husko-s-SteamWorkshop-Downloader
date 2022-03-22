@@ -1,5 +1,8 @@
 # Husko's SteamWorkshop Downloader  
   
+🔴**IMPORTANT**❗🔴  
+The Tool is currently being rewritten so updates will be slow and only on the dev branch until it is stable for a release!  
+  
 With this tool you can download and install mods from the SteamWorkshop Easily.
 This tool will download the file you entered via the steam workshop link and install it in the folder you configured.
 
