@@ -89,6 +89,26 @@
             "rename": [],
             "special": {}
     
+        },
+        "394360": {
+            "name": "Hearts of Iron IV",
+            "short": "hoi4",
+            "req_folder": false,
+            "reg_rename": false,
+            "reg_special": false,
+            "rename": [],
+            "special": {}
+    
+        },
+        "107410": {
+            "name": "Arma 3",
+            "short": "arma3",
+            "req_folder": false,
+            "reg_rename": false,
+            "reg_special": false,
+            "rename": [],
+            "special": {}
+    
         }
     }
 }

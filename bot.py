@@ -182,6 +182,7 @@ def config(cfg):
 
 
 def config2(cfg):
+    ctypes.windll.kernel32.SetConsoleTitleW("Husko's Steam Workshop Downloader | v" + version)
     if discord_active == 1:
         RPC.update(state="Looking for a mod to Download",buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text=game_names.get(game),small_image=config_names.get(game),large_image="bridge")
     global id
@@ -193,6 +194,7 @@ def config2(cfg):
         xxid = xid.strip("https://steamcommunity.com/sharedfiles/filedetails/?id=")
     else:
         print(colored("Something Went Wrong! Either wrong workshop URL or another error.", "red"))
+        print("")
         sleep(5)
         config2(cfg)
     id = re.match(r"(.*\d+)", xxid).group()
@@ -206,14 +208,14 @@ def config2(cfg):
 
 def downloader(cfg):
     if create_mod_list == "yes":
-        print(create_mod_list)
         counter = 0
         filename = config_names.get(game) + "_modlist{}.txt"
         while os.path.isfile(filename.format(counter)):
             counter += 1
         filename = filename.format(counter)
+    current_pos = 0
     for id in collection:
-        backend = ["node01","node02","node03","node04","node05"]
+        backend = ["node04","node05","node06","node07","node08"]
         bd = random.choice(backend)
         header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
         url = "https://" + bd + ".steamworkshopdownloader.io/prod/api/details/file"
@@ -267,7 +269,6 @@ def downloader(cfg):
         if proxies == "yes":
             proxy = random.choice(proxy_list)
             proxyy = {"http":proxy}
-            print(proxyy)
             page2 = requests.post(url2,headers={"User-Agent":header},proxies=proxyy,timeout=timeout,data=req_data).text
         else:
             page2 = requests.post(url2,headers={"User-Agent":header},timeout=timeout,data=req_data).text
@@ -332,7 +333,7 @@ def downloader(cfg):
             print("")
             collection.clear()
             config2(cfg)
-
+        
         # Stormworks: Build and Rescue
         if int(game) == 573090:
 
@@ -398,6 +399,17 @@ def downloader(cfg):
             for file_name in file_names:
                 shutil.move(os.path.join("temp/", file_name), mod_path)
 
+         # Ravenfield
+        elif int(game) == 636480:
+            mod_path = mods
+            if not os.path.exists(mod_path):
+                os.makedirs(mod_path)
+            source_dir = 'temp/'
+            file_names = os.listdir(source_dir)
+            shutil.rmtree(mod_path + "/" + safe_name, ignore_errors=True)
+            for file_name in file_names:
+                shutil.move(os.path.join("temp/", file_name), mod_path)
+
         else:
             print("Couldn't Determine mod while installing. Please report this issue to the dev")
         if badzip == True:
@@ -405,7 +417,9 @@ def downloader(cfg):
         else: 
             print("Mod " + colored(name, "green") + " Successfully Installed!")
             with open(config_names.get(game) + "_modlist.txt", "a") as wmf:
-                wmf.write(id + '\n')
+                wmf.write(xid + '\n')
+            current_pos += 1
+            ctypes.windll.kernel32.SetConsoleTitleW("Husko's Steam Workshop Downloader | " + str(current_pos) + "/" + str(amount) + " | v" + version)
         print("")
         shutil.rmtree('temp', ignore_errors=True)
         os.makedirs('temp')
@@ -473,7 +487,8 @@ supported_games = [
     400750,
     824270,
     4000,
-    1118200
+    1118200,
+    636480
 ]
 
 config_names = {
@@ -484,7 +499,8 @@ config_names = {
     400750: "cta_goh",
     824270: "kovaaks",
     4000:   "gmod",
-    1118200: "people_pg"
+    1118200: "people_pg",
+    636480: "ravenfield"
 }
 
 game_names = {
@@ -495,7 +511,8 @@ game_names = {
     400750: "Call to Arms - Gates of Hell: Ostfront",
     824270: "KovaaK's",
     4000:   "Garry's Mod",
-    1118200: "People Playground"
+    1118200: "People Playground",
+    636480: "Ravenfield"
 }
 
 # Check if the stormworks_config.ini exists else create it

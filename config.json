@@ -1,10 +1,15 @@
 {
     "app_settings": {
-        "updatechecker": "no",
+        "updatechecker": "yes",
         "makemodlist": "no",
-        "use_proxies": "no",
+        "use_proxies": "yes",
         "randomuseragent": "yes",
-        "timeout": "10"
+        "timeout": "10",
+        "discordrpc": "yes",
+        "notifications": "yes"
     },
-    "game_paths": {}
+    "game_paths": {
+        "comment": "Only Add path's by yourself if you know what your doing!",
+        "stormworks": "C:\\Users\\Official Husko\\AppData\\Roaming\\Stormworks\\data"
+    }
 }

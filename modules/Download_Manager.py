@@ -1,37 +1,31 @@
-from cgi import test
 from socket import timeout
 from time import sleep
-from tkinter import E
 import requests
 import random
-import ctypes
 import os
-import configparser
 import json
-import zipfile
-import shutil
 from pypresence import Presence
 from termcolor import colored
 from alive_progress import alive_bar
-import datetime
-import sys
-import re
+from datetime import date
 
-def downloader(MakeModList):
-    if MakeModList == "yes":
-        print(MakeModList)
-        counter = 0
-        filename = config_names.get(game) + "_modlist{}.txt"
-        while os.path.isfile(filename.format(counter)):
-            counter += 1
-        filename = filename.format(counter)
+# Defined Variables
+today = date.today()
+date = today.strftime("%d-%m-%Y - ")
+collection = []
+
+# Main Downloader Script
+def downloader():
     for id in collection:
+        if MakeModList == "yes":
+            with open(date + official_database['contents'][id]['short'] + "_modlist.txt", 'a') as f:
+                f.write(id)
         backend = ["node01","node02","node03","node04","node05"]
         bd = random.choice(backend)
         header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
         url = "https://" + bd + ".steamworkshopdownloader.io/prod/api/details/file"
         mod_id = "[" + id + "]"
-        if rua == "yes":
+        if RandomUserAgent == "yes":
             header = random.choice(user_agents)
         if proxies == "yes":
             proxy = random.choice(proxy_list)
@@ -124,9 +118,3 @@ def downloader(MakeModList):
                     file.flush()
                     bar()
         file.close()
-        if not_supported == True:
-            destination = 'manual/' + safe_name
-            if not os.path.exists('manual'):
-                os.makedirs('manual')
-        else:
-            destination = 'temp/' + safe_name
