@@ -1,1 +1,0 @@
-pyinstaller --onefile --icon "icon.ico" --console --name "SteamWorkshop Downloader" --add-data="C:/Python310/Lib/site-packages/grapheme/data/*;grapheme/data/" bot.py
