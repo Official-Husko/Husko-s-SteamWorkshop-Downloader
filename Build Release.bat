@@ -1,0 +1,1 @@
+pyinstaller --onedir --console --name "GetFileList" main.py --add-data "website/templates;website/templates" --add-data "website/static;website/static"
