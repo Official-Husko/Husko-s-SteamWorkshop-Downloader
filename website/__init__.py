@@ -1,6 +1,6 @@
 from flask import Flask
 import subprocess
-import os
+from os import path, name
 import hashlib
 from flask_sqlalchemy import SQLAlchemy
 
@@ -10,7 +10,7 @@ DB_NAME = "database.db"
 def create_app():
 
     # This gets the device HWID
-    if 'nt' in os.name:
+    if 'nt' in name:
         hwidr = str(subprocess.check_output('wmic csproduct get uuid')).split('\\r\\n')[1].strip('\\r').strip()
     else:
         hwidr = subprocess.Popen('hal-get-property --udi /org/freedesktop/Hal/devices/computer --key system.hardware.uuid'.split())
@@ -24,14 +24,24 @@ def create_app():
     hsc = hscr.hexdigest()
 
     app = Flask(__name__)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["SECRET_KEY"] = hsc
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
     db.init_app(app)
 
-    from.views import views
+    from .views import views
     from .auth import auth
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
 
+    from .models import User, UserGames, UserMods
+
+    create_db(app)
+
     return app
+
+def create_db(app):
+    if not path.exists("website/" + DB_NAME):
+        db.create_all(app=app)
+        print("Created Database!")
