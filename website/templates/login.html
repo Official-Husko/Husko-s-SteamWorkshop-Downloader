@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content %}
+<form method="POST">
+    <div class="login-container">
+        <div class="center">
+            <label for="username"></label>
+            <input type="text" name="username" class="username-input" placeholder="Username">
+
+            <label for="password"></label>
+            <div class="password">
+                <input type="password" name="password" class="password-input" placeholder="Password">
+            </div>
+
+            <div class="login-btn-border">
+                <button type="submit" class="login-btn" id="li-btn">Login</button>
+            </div>
+            <p id="texts">No account yet? <a id="texts" href="register">Register Here</a></p>
+        </div>
+    </div>
+</form>
+{% endblock %}

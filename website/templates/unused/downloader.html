@@ -1,90 +1,37 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='wolf-awesome.css') }}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/wolf-awesome.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css%22%3E"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/x-icon" color>
-    <title>{% block title %}Home{% endblock %}</title>
+    <title>Workshop Page</title>
 </head>
-
 <body>
+    <!-- Downloader -->
 
-    {% with messages = get_flashed_messages(with_categories=true) %} 
-        {% if messages %}
-            {% for category, message in messages %}
-                {% if category == "soft-error" %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
-
-                        <div class="message">
-                            <span class="text text-1">Error</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
-
-                    <div class="progress"></div>
+    <div class="downloader-container">
+        <div class="downloader-search-box">
+            <input type="search" name="search" class="workshop-search" placeholder="Workshop Link">
+            <div class="modlist-container">
+                <div class="modlist">
+                    <p class="list-name">More Vehicles -BETA- <a href="#" class="x-icon">X</a></p>
+                    <p class="list-name">More Vehicles -BETA- <a href="#" class="x-icon">X</a></p>
+                    <p class="list-name">More Vehicles -BETA- <a href="#" class="x-icon">X</a></p>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                {% elif category == "hard-error" %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
 
-                        <div class="message">
-                            <span class="text text-1">Oh no, something went wrong...</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
-
-                    <div class="progress"></div>
-                </div>
-
-                {% elif category == "success" %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
-
-                        <div class="message">
-                            <span class="text text-1">Success</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
-
-                    <div class="progress"></div>
-                </div>
-
-                {% else: %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
-
-                        <div class="message">
-                            <span class="text text-1">What the fuck did you do?</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
-
-                    <div class="progress"></div>
-                </div>
-                {% endif %}
-            {% endfor %} 
-        {% endif %} 
-    {% endwith %} 
-    {% block content %}{% endblock%}
+        
+    <!-- Sidebar -->
 
     <div class="sidebar close">
         <div class="logo-details">
             <i class='wa-wolf'></i>
-            <span class="logo_name">SteamWorkshop Downloader</span>
+            <span class="logo_name">Workshop Downloader</span>
         </div>
         <ul class="nav-links">
             <li>
@@ -189,38 +136,23 @@
             <li>
                 <div class="profile-details">
                     <div class="profile-content">
-                        <object data="file:///avatar.png" type="image/png">
-                            <img src="https://c.tenor.com/OZQVcrloOEYAAAAd/huh-what.gif" />
-                        </object>
+                        <!--<img src="image/profile.jpg" alt="profileImg">-->
                     </div>
                     <div class="name-job">
-                        <div class="profile_name">Husko1337</div>
-                        <div class="job">Developer</div>
+                        <div class="profile_name">Prem Shahi</div>
+                        <div class="job">Web Desginer</div>
                     </div>
                     <i class='bx bx-log-out'></i>
                 </div>
             </li>
         </ul>
     </div>
-    <div class="home-section">
-        <i class='bx bx-menu'></i>
-    </div>
-    <script>
-        let arrow = document.querySelectorAll(".arrow");
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e) => {
-                let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-                arrowParent.classList.toggle("showMenu");
-            });
-        }
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-        });
-    </script>
-    <script src="{{url_for('static', filename='main.js')}}"></script>
+<!-- 
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
+            <span class="text">Drop Down Sidebar</span>
+        </div>
+    </section> -->
 </body>
-
 </html>
