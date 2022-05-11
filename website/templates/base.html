@@ -8,71 +8,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/x-icon" color>
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 
 <body>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == "soft-error" %}
-    <div class="toast">
-        <div class="toast-content">
-            <i class="fas fa-solid fa-check check"></i>
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == "soft-error" %}
+                <!-- <div class="toast">
+                    <div class="toast-content">
+                        <i class="fas fa-solid fa-check check"></i>
 
-            <div class="message">
-                <span class="text text-1">Error</span>
-                <span class="text text-2">{{ message }}</span>
-            </div>
-        </div>
-        <i class="fa-solid fa-xmark close"></i>
+                        <div class="message">
+                            <p class="text text-1" id="txt-hide">Error</p>
+                            <span class="text text-2" id="txt-hide-2">{{ message }}</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-xmark close"></i>
 
-        <div class="progress"></div>
-    </div>
+                    <div class="progress"></div>
+                </div> -->
 
-    {% elif category == "hard-error" %}
-    <div class="toast">
-        <div class="toast-content">
-            <i class="fas fa-solid fa-check check"></i>
+                <!-- <button class="login-btn">Show toast</button> -->
 
-            <div class="message">
-                <span class="text text-1">Something got fucked, please report this.</span>
-                <span class="text text-2">{{ message }}</span>
-            </div>
-        </div>
-        <i class="fa-solid fa-xmark close"></i>
 
-        <div class="progress"></div>
-    </div>
+                <!-- <div class="toast">
+                    <div class="toast-content">
+                        <span class="circle"></span>
 
-    {% elif category == "success" %}
-    <div class="toast">
-        <div class="toast-content">
-            <i class="fas fa-solid fa-check check"></i>
+                        <div class="message">
+                            <p class="text text-1" id="txt-hide">Error</p>
+                            <span class="text text-2" id="txt-hide-2">{{ message }}</span>
+                        </div>
+                    </div>
+                </div> -->
 
-            <div class="message">
-                <span class="text text-1">Success</span>
-                <span class="text text-2">{{ message }}</span>
-            </div>
-        </div>
-        <i class="fa-solid fa-xmark close"></i>
 
-        <div class="progress"></div>
-    </div>
+                <div class="toast" id="toast">
+                    <div class="toast-content">
+                        
+                        <div class="message">
+                            <div class="circle"></div>
+                        
+                            <div class="text-content">
+                                <p class="text text-1" id="txt-hide">Error</p>
+                                <span class="text text-2" id="txt-hide-2">Username doesn't exist</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    {% else: %}
-    <div class="toast">
-        <div class="toast-content">
-            <i class="fas fa-solid fa-check check"></i>
+                {% elif category == "hard-error" %}
+    
 
-            <div class="message">
-                <span class="text text-1">What the fuck did you do?</span>
-                <span class="text text-2">{{ message }}</span>
-            </div>
-        </div>
-        <i class="fa-solid fa-xmark close"></i>
+                {% elif category == "success" %}
+                
+                {% else: %}
+                
+                {% endif %}
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %} 
+    {% block content %}{% endblock%}
 
-        <div class="progress"></div>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock%}
+    
 
     <div class="sidebar close">
         <div class="logo-details">
