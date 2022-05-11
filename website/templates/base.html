@@ -13,73 +13,66 @@
 
 <body>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} 
-        {% if messages %}
-            {% for category, message in messages %}
-                {% if category == "soft-error" %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == "soft-error" %}
+    <div class="toast">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
 
-                        <div class="message">
-                            <span class="text text-1">Error</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
+            <div class="message">
+                <span class="text text-1">Error</span>
+                <span class="text text-2">{{ message }}</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
 
-                    <div class="progress"></div>
-                </div>
+        <div class="progress"></div>
+    </div>
 
-                {% elif category == "hard-error" %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
+    {% elif category == "hard-error" %}
+    <div class="toast">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
 
-                        <div class="message">
-                            <span class="text text-1">Oh no, something went wrong...</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
+            <div class="message">
+                <span class="text text-1">Something got fucked, please report this.</span>
+                <span class="text text-2">{{ message }}</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
 
-                    <div class="progress"></div>
-                </div>
+        <div class="progress"></div>
+    </div>
 
-                {% elif category == "success" %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
+    {% elif category == "success" %}
+    <div class="toast">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
 
-                        <div class="message">
-                            <span class="text text-1">Success</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
+            <div class="message">
+                <span class="text text-1">Success</span>
+                <span class="text text-2">{{ message }}</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
 
-                    <div class="progress"></div>
-                </div>
+        <div class="progress"></div>
+    </div>
 
-                {% else: %}
-                <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
+    {% else: %}
+    <div class="toast">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
 
-                        <div class="message">
-                            <span class="text text-1">What the fuck did you do?</span>
-                            <span class="text text-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
+            <div class="message">
+                <span class="text text-1">What the fuck did you do?</span>
+                <span class="text text-2">{{ message }}</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
 
-                    <div class="progress"></div>
-                </div>
-                {% endif %}
-            {% endfor %} 
-        {% endif %} 
-    {% endwith %} 
-    {% block content %}{% endblock%}
+        <div class="progress"></div>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock%}
 
     <div class="sidebar close">
         <div class="logo-details">
@@ -87,12 +80,45 @@
             <span class="logo_name">SteamWorkshop Downloader</span>
         </div>
         <ul class="nav-links">
+            {% if user.is_anonymous %}
             <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
+                <a href="/login">
+                    <i class='bx bx-history'></i>
+                    <span class="link_name">Login</span>
                 </a>
                 <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/login">Login</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/register">
+                    <i class='bx bx-history'></i>
+                    <span class="link_name">Register</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/register">Register</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li>
+                <a href="/games">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Games</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="games">Games</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="downloader">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Downloader</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="downloader">Downloader</a></li>
+                </ul>
+            </li>
+            <!---<ul class="sub-menu blank">
                     <li><a class="link_name" href="#">Category</a></li>
                 </ul>
             </li>
@@ -176,14 +202,14 @@
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="#">History</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li>
-                <a href="#">
+                <a href="settings">
                     <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
+                    <span class="link_name">Settings</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Setting</a></li>
+                    <li><a class="link_name" href="settings">Settings</a></li>
                 </ul>
             </li>
             <li>
@@ -194,12 +220,17 @@
                         </object>
                     </div>
                     <div class="name-job">
-                        <div class="profile_name">Husko1337</div>
+                        <div class="profile_name">{{session['username']}}</div>
+                        {% if session['username'] == "Husko1337" or session['username'] == "BillyTheFurry" %}
                         <div class="job">Developer</div>
+                        {% else %}
+                        <div class="job">User</div>
+                        {% endif %}
                     </div>
-                    <i class='bx bx-log-out'></i>
+                    <a href="/logout"><i class='bx bx-log-out'></i></a>
                 </div>
             </li>
+            {% endif %}
         </ul>
     </div>
     <div class="home-section">
