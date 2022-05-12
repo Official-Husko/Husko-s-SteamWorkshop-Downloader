@@ -5,6 +5,7 @@ import hashlib
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from time import time
+import secrets
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -17,14 +18,12 @@ def create_app():
     else:
         hwidr = subprocess.Popen('hal-get-property --udi /org/freedesktop/Hal/devices/computer --key system.hardware.uuid'.split())
 
-    id = "hcQSXLBr3GuYw3K5M5Ma2EC355BYPaXUmC8BYyjrpGxXh3QnD8r5FCAJNwyLuUh4"
-    ct = time()
-    softid = id.encode(encoding = 'UTF-8')
     hwid = hwidr.encode(encoding = 'UTF-8')
-    cte = str(ct).encode(encoding = 'UTF-8')
+    cte = str(time()).encode(encoding = 'UTF-8')
+    sc = secrets.token_hex(16).encode(encoding = 'UTF-8')
 
     # This Generates a safe and Device Unique Key to protect the cookies
-    hscr = hashlib.sha3_512(softid + hwid + cte)
+    hscr = hashlib.sha3_512(hwid + cte + sc)
     hsc = hscr.hexdigest()
 
     app = Flask(__name__)
@@ -56,4 +55,3 @@ def create_app():
 def create_db(app):
     if not path.exists("website/" + DB_NAME):
         db.create_all(app=app)
-        print("Created Database!")

@@ -20,6 +20,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.wa-add:before {
+  content: "\e912";
+}
 .wa-alert:before {
   content: "\e900";
 }
@@ -59,9 +62,18 @@
 .wa-logo:before {
   content: "\e90c";
 }
-.wa-menu:before {
+.wa-logout:before {
   content: "\e90d";
 }
-.wa-question:before {
+.wa-menu:before {
   content: "\e90e";
+}
+.wa-menu-alt1:before {
+  content: "\e90f";
+}
+.wa-question:before {
+  content: "\e910";
+}
+.wa-settings:before {
+  content: "\e911";
 }
