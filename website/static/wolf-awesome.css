@@ -20,12 +20,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-<<<<<<< Updated upstream
-=======
 .wa-add:before {
   content: "\e912";
 }
->>>>>>> Stashed changes
 .wa-alert:before {
   content: "\e900";
 }
@@ -65,14 +62,6 @@
 .wa-logo:before {
   content: "\e90c";
 }
-<<<<<<< Updated upstream
-.wa-menu:before {
-  content: "\e90d";
-}
-.wa-question:before {
-  content: "\e90e";
-}
-=======
 .wa-logout:before {
   content: "\e90d";
 }
@@ -88,4 +77,3 @@
 .wa-settings:before {
   content: "\e911";
 }
->>>>>>> Stashed changes
