@@ -625,6 +625,62 @@ body {
     position: relative;
 }
 
+.box {
+    /* width: 100%; */
+    /* display: flex; */
+    position: absolute;
+    left: 67.6%;
+    top: 14.5px;
+    width: 6px;
+    height: 100px;
+    /* min-height: 50px; */
+    background-color: red;
+    /* padding: 3px; */
+}
+
+.message {
+    position: absolute;
+    left: 68%;
+    top: 15px;
+    /* border: 1px solid blue; */
+    background-color: #0f111a;
+    width: 30%;
+    min-width: 200px;
+    padding: 25px;
+    font-size: 16px;
+    /* font-weight: bold; */
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    /* margin-top: 5px; */
+}
+
+.text-1 {
+    color: red;
+}
+
+.icon-pos {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: 11px;
+    left: 94%;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+
+
+
+
+/* .toast-content {
+    position: relative;
+}
+
 .message {
     position: absolute;
     left: 77%;
@@ -647,7 +703,13 @@ body {
 
 .text {
     margin-top: 5px;
-}
+} */
+
+
+
+
+
+
 
 /* .text {
     display: flex;

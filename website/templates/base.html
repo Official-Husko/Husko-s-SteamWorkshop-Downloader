@@ -51,6 +51,24 @@
 
                 <div class="toast" id="toast">
                     <div class="toast-content">
+            
+                        <div class="box"></div>
+            
+                        <div class="message">
+                            <a class="wa-close icon-pos" id="close-btn"></a>
+            
+                            <div class="text-content">
+                                <p class="text text-1" id="txt-hide">Error</p>
+                                <span class="text text-2" id="txt-hide-2">{{ message }}</span>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+
+
+                <!-- <div class="toast" id="toast">
+                    <div class="toast-content">
                         
                         <div class="message">
                             <div class="circle"></div>
@@ -61,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 {% elif category == "hard-error" %}
     
@@ -76,7 +94,6 @@
     {% endwith %} 
     {% block content %}{% endblock%}
 
-    
 
     <div class="sidebar close">
         <div class="logo-details">
