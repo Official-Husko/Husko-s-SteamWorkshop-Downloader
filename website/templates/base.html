@@ -6,11 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='wolf-awesome.css') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/x-icon" color>
-
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 
@@ -97,14 +93,14 @@
 
     <div class="sidebar close">
         <div class="logo-details">
-            <i class='wa-wolf'></i>
+            <i class='wa-logo'></i>
             <span class="logo_name">SteamWorkshop Downloader</span>
         </div>
         <ul class="nav-links">
             {% if user.is_anonymous %}
             <li>
                 <a href="/login">
-                    <i class='bx bx-history'></i>
+                    <i class='wa-enter'></i>
                     <span class="link_name">Login</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -113,7 +109,7 @@
             </li>
             <li>
                 <a href="/register">
-                    <i class='bx bx-history'></i>
+                    <i class='wa-edit'></i>
                     <span class="link_name">Register</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -123,7 +119,7 @@
             {% else %}
             <li>
                 <a href="/games">
-                    <i class='bx bx-cog'></i>
+                    <i class='wa-gamepad'></i>
                     <span class="link_name">Games</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -132,11 +128,20 @@
             </li>
             <li>
                 <a href="downloader">
-                    <i class='bx bx-cog'></i>
+                    <i class='wa-download'></i>
                     <span class="link_name">Downloader</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="downloader">Downloader</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="mods-library">
+                    <i class='wa-library'></i>
+                    <span class="link_name">Mods Library</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="mods-library">Mods Library</a></li>
                 </ul>
             </li>
             <!---<ul class="sub-menu blank">
@@ -226,7 +231,7 @@
             </li> -->
             <li>
                 <a href="settings">
-                    <i class='bx bx-cog'></i>
+                    <i class='wa-settings'></i>
                     <span class="link_name">Settings</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -240,22 +245,22 @@
                             <img src="https://c.tenor.com/OZQVcrloOEYAAAAd/huh-what.gif" />
                         </object>
                     </div>
-                    <div class="name-job">
+                    <div class="name-role">
                         <div class="profile_name">{{session['username']}}</div>
                         {% if session['username'] == "Husko1337" or session['username'] == "BillyTheFurry" %}
-                        <div class="job">Developer</div>
+                        <div class="role">Developer</div>
                         {% else %}
-                        <div class="job">User</div>
+                        <div class="role"></div>
                         {% endif %}
                     </div>
-                    <a href="/logout"><i class='bx bx-log-out'></i></a>
+                    <a href="/logout"><i class='wa-logout'></i></a>
                 </div>
             </li>
             {% endif %}
         </ul>
     </div>
     <div class="home-section">
-        <i class='bx bx-menu'></i>
+        <i class='wa-menu-alt1'></i>
     </div>
     <script>
         let arrow = document.querySelectorAll(".arrow");
@@ -266,7 +271,7 @@
             });
         }
         let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
+        let sidebarBtn = document.querySelector(".wa-menu-alt1");
         console.log(sidebarBtn);
         sidebarBtn.addEventListener("click", () => {
             sidebar.classList.toggle("close");
