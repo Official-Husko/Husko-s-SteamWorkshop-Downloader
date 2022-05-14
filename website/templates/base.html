@@ -16,43 +16,15 @@
         {% if messages %}
             {% for category, message in messages %}
                 {% if category == "soft-error" %}
-                <!-- <div class="toast">
-                    <div class="toast-content">
-                        <i class="fas fa-solid fa-check check"></i>
-
-                        <div class="message">
-                            <p class="text text-1" id="txt-hide">Error</p>
-                            <span class="text text-2" id="txt-hide-2">{{ message }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-xmark close"></i>
-
-                    <div class="progress"></div>
-                </div> -->
-
-                <!-- <button class="login-btn">Show toast</button> -->
-
-
-                <!-- <div class="toast">
-                    <div class="toast-content">
-                        <span class="circle"></span>
-
-                        <div class="message">
-                            <p class="text text-1" id="txt-hide">Error</p>
-                            <span class="text text-2" id="txt-hide-2">{{ message }}</span>
-                        </div>
-                    </div>
-                </div> -->
-
 
                 <div class="toast" id="toast">
                     <div class="toast-content">
             
-                        <div class="box"></div>
-            
-                        <div class="message">
+                        <div class="close-btn">
                             <a class="wa-close icon-pos" id="close-btn"></a>
+                        </div>
             
+                        <div class="message">            
                             <div class="text-content">
                                 <p class="text text-1" id="txt-hide">Error</p>
                                 <span class="text text-2" id="txt-hide-2">{{ message }}</span>
@@ -62,27 +34,81 @@
                     </div>
                 </div>
 
-
-                <!-- <div class="toast" id="toast">
-                    <div class="toast-content">
-                        
-                        <div class="message">
-                            <div class="circle"></div>
-                        
-                            <div class="text-content">
-                                <p class="text text-1" id="txt-hide">Error</p>
-                                <span class="text text-2" id="txt-hide-2">Username doesn't exist</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
                 {% elif category == "hard-error" %}
     
+                <div class="toast" id="toast">
+                    <div class="toast-content">
+            
+                        <div class="close-btn">
+                            <a class="wa-close icon-pos" id="close-btn"></a>
+                        </div>
+            
+                        <div class="message">            
+                            <div class="text-content">
+                                <p class="text text-1" id="txt-hide">Error</p>
+                                <span class="text text-2" id="txt-hide-2">{{ message }}</span>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
 
                 {% elif category == "success" %}
+
+                <div class="toast" id="toast">
+                    <div class="toast-content success">
+            
+                        <div class="close-btn">
+                            <a class="wa-close icon-pos" id="close-btn"></a>
+                        </div>
+            
+                        <div class="message">            
+                            <div class="text-content">
+                                <p class="text text-success" id="txt-hide">Success</p>
+                                <span class="text text-2" id="txt-hide-2">{{ message }}</span>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+
+                {% elif category == "info" %}
+
+                <div class="toast" id="toast">
+                    <div class="toast-content info">
+            
+                        <div class="close-btn">
+                            <a class="wa-close icon-pos" id="close-btn"></a>
+                        </div>
+            
+                        <div class="message">            
+                            <div class="text-content">
+                                <p class="text text-info" id="txt-hide">Info</p>
+                                <span class="text text-2" id="txt-hide-2">{{ message }}</span>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
                 
                 {% else: %}
+
+                <div class="toast" id="toast">
+                    <div class="toast-content unknown">
+            
+                        <div class="close-btn">
+                            <a class="wa-close icon-pos" id="close-btn"></a>
+                        </div>
+            
+                        <div class="message">            
+                            <div class="text-content">
+                                <p class="text text-unknown" id="txt-hide">Unknown</p>
+                                <span class="text text-2" id="txt-hide-2">{{ message }}</span>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
                 
                 {% endif %}
             {% endfor %} 

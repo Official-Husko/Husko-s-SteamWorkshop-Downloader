@@ -35,22 +35,17 @@
 
 // Works
 
-// setTimeout(function() {
-//     let toast = document.getElementById("toast");
-//     toast.parentNode.removeChild(toast);
-// }, 2000);
-
-
 const closeBtn = document.getElementById('close-btn');
 const toast = document.getElementById("toast");
 
 closeBtn.addEventListener('click', () => {
     toast.parentNode.removeChild(toast);
-})
+});
 
 setTimeout(function() {
     toast.parentNode.removeChild(toast);
 }, 5000);
+
 
 
 
