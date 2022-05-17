@@ -3,9 +3,8 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 class UserMods(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    mod_id = db.Column(db.String(1024), primary_key=True)
     mod_name = db.Column(db.String(1024))
-    mod_id = db.Column(db.String(1024))
     mod_added = db.Column(db.DateTime(timezone=True), default=func.now())
     mod_updated = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))

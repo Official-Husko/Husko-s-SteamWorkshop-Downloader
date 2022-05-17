@@ -15,27 +15,8 @@
     {% with messages = get_flashed_messages(with_categories=true) %} 
         {% if messages %}
             {% for category, message in messages %}
-                {% if category == "soft-error" %}
+                {% if category == "error" %}
 
-                <div class="toast" id="toast">
-                    <div class="toast-content">
-            
-                        <div class="close-btn">
-                            <a class="wa-close icon-pos" id="close-btn"></a>
-                        </div>
-            
-                        <div class="message">            
-                            <div class="text-content">
-                                <p class="text text-1" id="txt-hide">Error</p>
-                                <span class="text text-2" id="txt-hide-2">{{ message }}</span>
-                            </div>
-                        </div>
-            
-                    </div>
-                </div>
-
-                {% elif category == "hard-error" %}
-    
                 <div class="toast" id="toast">
                     <div class="toast-content">
             
@@ -102,7 +83,7 @@
             
                         <div class="message">            
                             <div class="text-content">
-                                <p class="text text-unknown" id="txt-hide">Unknown</p>
+                                <p class="text text-unknown" id="txt-hide">Something got fucked.. Report this to the dev</p>
                                 <span class="text text-2" id="txt-hide-2">{{ message }}</span>
                             </div>
                         </div>
@@ -149,7 +130,7 @@
                     <span class="link_name">Games</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="games">Games</a></li>
+                    <li><a class="link_name" href="/games">Games</a></li>
                 </ul>
             </li>
             <li>
@@ -158,7 +139,7 @@
                     <span class="link_name">Downloader</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="downloader">Downloader</a></li>
+                    <li><a class="link_name" href="/downloader">Downloader</a></li>
                 </ul>
             </li>
             <li>
@@ -167,7 +148,7 @@
                     <span class="link_name">Mods Library</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="mods-library">Mods Library</a></li>
+                    <li><a class="link_name" href="/mods-library">Mods Library</a></li>
                 </ul>
             </li>
             <!---<ul class="sub-menu blank">

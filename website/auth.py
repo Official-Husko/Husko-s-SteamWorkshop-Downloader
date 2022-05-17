@@ -20,9 +20,9 @@ def login():
                 login_user(user, remember=True)
                 return redirect(url_for("views.home"))
             else:
-                flash("Incorrect Password, try again.", category="soft-error")
+                flash("Incorrect Password, try again.", category="error")
         else:
-            flash("User does not exist.", category="soft-error")
+            flash("User does not exist.", category="error")
 
     return render_template("login.html", user=current_user)
 
@@ -31,6 +31,7 @@ def login():
 def logout():
     session.pop('username', None)
     logout_user()
+    flash("Successfully Logged Out!", category="success")
     return redirect(url_for("auth.login"))
 
 @auth.route("/register", methods=["GET", "POST"])
@@ -42,11 +43,11 @@ def sign_up():
 
         user = User.query.filter_by(username=username).first()
         if user:
-            flash("Username is taken, please choose a different one", category="soft-error")
+            flash("Username is taken, please choose a different one.", category="error")
         elif password != password_confirm:
-            flash("Confirm Password does not match Password!", category="soft-error")
-        elif len(password) <= 4:
-            flash("Password must be at least 4 characters long!", category="soft-error")
+            flash("Passwords do not match!", category="error")
+        elif len(password) + 1 <= 4:
+            flash("Password must be at least 4 characters long!", category="error")
         else:
             new_user = User(username=username, password=generate_password_hash(password, method="sha256"))
             db.session.add(new_user)
@@ -54,7 +55,7 @@ def sign_up():
             user = User.query.filter_by(username=username).first()
             session['username'] = request.form['username']
             login_user(user, remember=True)
-            flash("Account Created successfully", category="success")
+            flash("Account Created Successfully!", category="success")
             return redirect(url_for("views.home"))
 
     return render_template("register.html", user=current_user)

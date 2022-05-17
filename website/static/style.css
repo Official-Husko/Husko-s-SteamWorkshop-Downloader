@@ -93,7 +93,7 @@
     min-width: 78px;
     text-align: center;
     line-height: 50px;
-    color: #fff;
+    color: #dddd;
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -116,7 +116,7 @@
 .sidebar .nav-links li a .link_name {
     font-size: 18px;
     font-weight: 400;
-    color: #fff;
+    color: #dddd;
     transition: all 0.4s ease;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .sidebar .nav-links li .sub-menu a {
-    color: #fff;
+    color: #dddd;
     font-size: 15px;
     padding: 5px 0;
     white-space: nowrap;
@@ -233,7 +233,7 @@
 
 .sidebar .profile-details .profile_name,
 .sidebar .profile-details .role {
-    color: #fff;
+    color: #dddd;
     font-size: 18px;
     font-weight: 500;
     white-space: nowrap;
@@ -312,7 +312,7 @@
 /* Login */
 
 body {
-    background-image: url('t-bg5.png');
+    background-image: url('background.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -526,6 +526,7 @@ body {
     background-color: #1d1b31;
     position: relative;
     width: 10%;
+    height: 10%;
     margin: 3%;
 }
 
@@ -620,7 +621,7 @@ body {
 #texts {
     margin-top: 25px;
     font-size: 15px;
-    color: #1D1F20;
+    color: #252525;
 }
 
 
@@ -635,8 +636,6 @@ body {
     top: 15px;
     border-radius: 4px;
     border-left: 5px solid red;
-
-
 }
 
 .toast-content {
@@ -647,15 +646,12 @@ body {
     0% {
         transform: translateX(100%);
     }
-
     40% {
         transform: translateX(-10%);
     }
-    
     80% {
         transform: translateX(0%);
     }
-
     100% {
         transform: translateX(-15px);
     }
@@ -664,7 +660,7 @@ body {
 .toast-content .message {
     padding: 0 20px;
     font-size: 18px;
-    color: #fff;
+    color: #dddd;
 }
 
 .text-1 {
@@ -694,12 +690,4 @@ body {
 
 .toast-content.info {
     border-left: 5px solid #166beb;
-}
-
-.text-unknown {
-    color: #ffe600;
-}
-
-.toast-content.unknown {
-    border-left: 5px solid #ffe600;
 }

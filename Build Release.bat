@@ -1,1 +1,1 @@
-pyinstaller --onedir --console --name "WebUI Test" main.py --add-data "website/templates;website/templates" --add-data "website/static;website/static"
+pyinstaller --onedir --console --name "WebUI Test" main.py --add-data "website/templates;website/templates" --add-data "website/static;website/static" --icon "icon.ico"
