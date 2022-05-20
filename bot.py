@@ -1,6 +1,5 @@
 from socket import timeout
 from time import sleep
-from tkinter import E
 import requests
 import random
 import ctypes
@@ -19,11 +18,12 @@ import re
 # Defined Variables
 global cfg
 cfg = configparser.RawConfigParser()
-version = "1.6"
+version = "1.7"
 threads = 1
 get_date = datetime.datetime.now()
 month = get_date.month
 collection = []
+backend = []
 
 # Connect to Discord RPC
 client_id = '945401698401284116'
@@ -44,8 +44,6 @@ elif not os.path.exists('temp'):
 if not os.path.exists('configs'):
     os.makedirs('configs')
 
-
-
 # Checking for updates on startup
 def update_checker():
     if check_for_updates == "yes":
@@ -59,7 +57,7 @@ def update_checker():
         dir_url = str(git_data['assets'][0]['browser_download_url'])
         updt_name = str(git_data.get('name'))
         updt_rel = str(git_data.get('published_at'))
-        if float(version) < float(cv):
+        if version < cv:
             if discord_active == 1:
                 RPC.update(state="Updating Downloader to " + cv,buttons=[{"label": "GitHub", "url": "https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader"},],small_text="Updating",small_image="update",large_image="bridge")
             print(colored("A new Update is available!", "green"))
@@ -103,6 +101,26 @@ def update_checker():
 
 # Set CMD Title
 ctypes.windll.kernel32.SetConsoleTitleW("Husko's Steam Workshop Downloader | v" + version)
+
+def node_checker(cfg):
+    print(colored("Testing Backends!", "yellow"))
+    possible_backends = ["node01", "node02", "node03", "node04","node05","node06","node07","node08"]
+    header = random.choice(user_agents)
+    for backends in possible_backends:
+        try: 
+            test = requests.post("https://" + backends + ".steamworkshopdownloader.io/prod/api/details/file",headers={"User-Agent":header},timeout=5,data="[2804133490]").status_code
+            if test == 200:
+                print("[" + colored("+", "green") + "]: " + backends)
+                backend.append(backends)
+            else:
+                print("[" + colored("-", "red") + "]: " + backends)
+                pass
+        except requests.exceptions.Timeout as e: 
+            print("[" + colored("-", "red") + "]: " + backends)
+            pass
+    print(backend)
+    sleep(5)
+    game_selection(cfg)
 
 def game_selection(cfg):
     if discord_active == 1:
@@ -215,9 +233,7 @@ def downloader(cfg):
         filename = filename.format(counter)
     current_pos = 0
     for id in collection:
-        backend = ["node04","node05","node06","node07","node08"]
         bd = random.choice(backend)
-        header = "User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36"
         url = "https://" + bd + ".steamworkshopdownloader.io/prod/api/details/file"
         mod_id = "[" + id + "]"
         if rua == "yes":
@@ -567,7 +583,7 @@ def proxy_scraper(cfg):
     fix_proxy = proxy_raw.split()
     global proxy_list
     proxy_list = fix_proxy
-    game_selection(cfg)
+    node_checker(cfg)
 
 if __name__ == '__main__':
     app_cfg_checker(cfg)
