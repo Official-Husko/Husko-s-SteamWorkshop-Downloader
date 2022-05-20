@@ -118,8 +118,6 @@ def node_checker(cfg):
         except requests.exceptions.Timeout as e: 
             print("[" + colored("-", "red") + "]: " + backends)
             pass
-    print(backend)
-    sleep(5)
     game_selection(cfg)
 
 def game_selection(cfg):
