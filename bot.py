@@ -531,22 +531,23 @@ game_names = {
 
 # Check if the stormworks_config.ini exists else create it
 def check_config(cfg):
+    cfg2 = configparser.RawConfigParser()
     if not os.path.exists("configs/" + config_names.get(game) + "_config.ini"):
-        cfg.add_section('Default')
-        cfg.set('Default', '# Enter the Path to the games mod folder', '')
-        cfg.set('Default', 'ModsPath', 'insert-path-here')
-        cfg.set('Default', '# if proxies should be scraped and used', '')
-        cfg.set('Default', 'Proxies', 'yes')
-        cfg.set('Default', '# Randomize User Agent', '')
-        cfg.set('Default', 'RandomUserAgent', 'yes')
-        cfg.set('Default', '# Request Timeout', '')
-        cfg.set('Default', 'TimeOut', '10')
+        cfg2.add_section('Default')
+        cfg2.set('Default', '# Enter the Path to the games mod folder', '')
+        cfg2.set('Default', 'ModsPath', 'insert-path-here')
+        cfg2.set('Default', '# if proxies should be scraped and used', '')
+        cfg2.set('Default', 'Proxies', 'yes')
+        cfg2.set('Default', '# Randomize User Agent', '')
+        cfg2.set('Default', 'RandomUserAgent', 'yes')
+        cfg2.set('Default', '# Request Timeout', '')
+        cfg2.set('Default', 'TimeOut', '10')
         with open(r"configs/" + config_names.get(game) + "_config.ini", 'w') as configfile:
-            cfg.write(configfile)
+            cfg2.write(configfile)
         configfile.close()
-        print("New Config file was generated! Please configure it and then start the bot again")
-        sleep(5)
-        sys.exit(0)
+        print("New Config file was generated! Please configure it and then enter the App ID again.")
+        sleep(3)
+        game_selection(cfg)
     config(cfg)
 
 # Checks for a global app config
