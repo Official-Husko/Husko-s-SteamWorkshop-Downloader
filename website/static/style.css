@@ -255,7 +255,7 @@
     font-size: 35px;
     left: 260px;
     top: 0%;
-    width: calc(100% - 260px);
+    /* width: calc(100% - 260px); */
     transition: all 0.5s ease;
 }
 
@@ -323,7 +323,7 @@ body {
     left: 0; */
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 200px #0f111a inset;
+    /* box-shadow: 0 0 200px #0f111a inset; */
 }
 
 .center {
@@ -344,6 +344,7 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
+    /* z-index: 1; */
 }
 
 .username-input {
@@ -373,12 +374,13 @@ body {
     border-radius: 14px;
     cursor: pointer;
     outline: none;
+    transition: 0.5s ease;
 }
 
 .login-btn:hover {
     opacity: 0.8;
     background-color: #1d1b31;
-    transition: 0.5s;
+    transition: 0.5s ease;
 }
 
 .login-btn-border {
@@ -472,9 +474,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
-    margin-left: 13%;
+    width: 76.8%;
+    margin-left: 13.95%;
     margin-top: 40px;
+    margin-bottom: 15px;
 }
 
 .search-bar-box {
@@ -495,13 +498,12 @@ body {
     border-radius: 25px;
     outline: none;
     margin: 10px;
-    width: 100%;
     margin-left: 69%;
-    padding: 3px;
+    padding: 3px 30px;
 }
 
 
-/* Boxes */
+/* Game Boxes */
 
 * {
     box-sizing: border-box;
@@ -516,54 +518,58 @@ body {
 }
 
 .game-box-container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
-
-/* .game-box-container.scroll {
-    overflow-x: hidden;
-    overflow-y: auto;
-} */
-
-/* .flex-container {
-    width: 100%;
-    border: 1px solid blue;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-} */
-
-/*
-.box-1 {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(cyan, red);
-    text-align: center;
-    border-radius: 20px;
-    margin: 15px;
-} */
 
 .game-box {
-    width: 130px;
-    height: 100px;
+    width: 188.28px;
+    height: 96.82px;
     background-color: #1d1b31;
     position: relative;
-    margin: 1%;
+    margin: 1.2%;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
 }
 
-.add-game {
-    background-color: #090A10;
+.game-box:hover {
+    opacity: 0.8;
+    transition: 0.3s ease-in-out;
+}
+
+.game-container {
+    position: relative;
+}
+
+.game {
     position: absolute;
-    font-size: 12px;
-    padding: 3px;
-    padding-bottom: 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    background-color: #090A10;
+    overflow: hidden;
     width: 100%;
-    height: auto;
-    bottom: -15px;
+    height: 0;
+    transition: .4s ease-in-out;
+    opacity: 0.8;
+}
+
+.game-container:hover .game {
+    height: 45%;
+}
+
+.game-box-text {
+    color: white;
+    opacity: 1;
+}
+
+.game-box-image {
+    width: 100%;
+    height: 100%;
 }
 
 .wa-add {
@@ -572,15 +578,24 @@ body {
     align-items: center;
     font-size: 25px;
     text-align: center;
-    padding-bottom: 15px;
-    width: 130px;
-    height: 100px;
+    width: 188.28px;
+    height: 96.82px;
+    transition: 0.2s ease-in-out;
+}
+
+.wa-add:hover {
+    font-size: 30px;
+    transition: 0.2s ease-in-out;
 }
 
 @media (max-width: 800px) {
     .game-box-container {
         flex-direction: column;
     }
+}
+
+.mods-installed-text {
+    font-size: 12px;
 }
 
 
@@ -661,6 +676,7 @@ body {
     top: 15px;
     border-radius: 4px;
     border-left: 5px solid red;
+    z-index: 1;
 }
 
 .toast-content {
@@ -699,7 +715,19 @@ body {
     font-size: 14px;
     color: red;
     cursor: pointer;
+    transition: transform .25s, opacity .25s;
+	opacity: .7;
 }
+
+.close-btn:before{
+	content: "";
+}
+
+.close-btn:hover{
+	opacity: 1;
+	transform: rotate(90deg);
+}
+
 
 .text-success {
     color: #15db15;
@@ -716,3 +744,139 @@ body {
 .toast-content.info {
     border-left: 5px solid #166beb;
 }
+
+/* Scrollbar (Firefox) */
+
+@supports (scrollbar-color: #0F111A #06070A ) {
+    *{
+        scrollbar-color: #0F111A #06070A;
+    }
+}
+
+/* Game Setup */
+
+#content {
+    transition: 0.8s ease;
+}
+
+.blur-bg {
+    filter: blur(8px);
+    transition: 0.8s ease;
+}
+
+.game-setup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s linear;
+    visibility: hidden;
+    z-index: -10;
+    
+}
+
+.open-modal {
+    visibility: visible;
+    z-index: 10;
+}
+
+.game-setup {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px cyan;
+    border-radius: 25px;
+    width: 55%;
+    height: 250px;
+    background-color: #0F111A;
+}
+
+.game-setup-inputs {
+    background-color: #0C0E15;
+    color: #dddd;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    margin: 7px;
+    padding: 7px;
+    width: 90%;
+}
+
+.game-setup-button {
+    padding: 7px 70px;
+    border: none;
+    background-color: #090A10;
+    color: #dddd;
+    border-radius: 14px;
+    cursor: pointer;
+    outline: none;
+    /* transition: 0.5s; */
+}
+
+.game-setup-button:hover {
+    opacity: 0.8;
+    background-color: #1d1b31;
+    transition: 0.5s ease;
+}
+
+.game-setup-border {
+    --borderWidth: 3px;
+    margin-top: 8px;
+    background: #1D1F20;
+    position: relative;
+    border-radius: 20px;
+}
+
+.game-setup-border:after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(160deg, red, yellow, lime, aqua, blue, magenta, red, yellow, lime, aqua, blue, magenta, red, yellow, lime, aqua, blue, magenta, red, yellow, lime, aqua, blue, magenta, red);
+    border-radius: calc(5 * var(--borderWidth));
+    z-index: -1;
+    animation: animate 3s linear infinite;
+    background-size: 900% 900%;
+}
+
+@keyframes animate {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+#li-btn {
+    animation-delay: 0.3s;
+}
+
+.game-setup-close {
+    color: #ddd;
+    position: absolute;
+    top: 5%;
+    left: 95%;
+    cursor: pointer;
+    transition: transform .25s, opacity .25s;
+	opacity: .7;
+}
+
+.game-setup-close:before{
+	content: "\d7";
+}
+
+.game-setup-close:hover{
+	opacity: 1;
+	transform: rotate(90deg);
+}
+

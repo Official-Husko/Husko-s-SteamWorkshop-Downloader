@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block title %}Games{% endblock %} {% block content %}
+<div id="content">
     <div class="search-container">
         <div class="search-bar-box">
             <div class="search-box">
@@ -8,25 +9,62 @@
     </div>
     <div class="box-container">
         <div class="game-box-container">
-                <div class="game-box">
-                    <i class="wa-add"></i>
-    
-                    <div class="add-game">
-                        <p>Add Game</p>
+
+                <div class="game-box game-container">
+
+                    <img src="{{ url_for('static', filename='project-zomboid-logo.jpg') }}" alt="Project Zomboid Logo" class="game-box-image"/>
+
+                    <div class="game">
+                        <div class="game-box-text">Project Zomboid</div>
+                        <div class="mods-installed-text">Mods Installed</div>
                     </div>
                 </div>
+
+                <!-- Add Game Box -->
+                <div class="game-box game-container" id="game-config">
+                    
+                    <a class="plus-sign"><i class="wa-add"></i></a>
+        
+                    <div class="game">
+                        <div class="game-box-text">Add Game</div>
+                        <!-- <div class="mods-installed-text">Mods Installed</div> -->
+                    </div>
+                </div>
+
             </div>
+        </div>
 
+        <!-- Game Setup -->
 
-            <!-- <div class="flex-container">
-                <div class="box-1">
-                    Box 1
+        <!-- <div class="game-setup-container">
+            <div class="game-setup" id="game-setup-box">
+                <a class="wa-close game-setup-close" id="testing-close"></a>
+    
+                <input type="text" class="game-setup-inputs" placeholder="Game Name">
+                <input type="text" class="game-setup-inputs" placeholder="Game ID">
+                <input type="text" class="game-setup-inputs" placeholder="Game Path">
+                
+                <div class="game-setup-border">
+                    <button type="submit" class="game-setup-button" id="li-btn">Add Game</button>
                 </div>
-
-                <div class="box-1">
-                    Box 2
+            </div>
+        </div> -->
+</div>
+        <div id="modal-animation" class="modal-animation-close">
+            <div class="game-setup-container">
+                <div class="game-setup">
+                    <a class="wa-close game-setup-close"></a>
+    
+                    <input type="text" class="game-setup-inputs" placeholder="Game Name">
+                    <input type="text" class="game-setup-inputs" placeholder="Game ID">
+                    <input type="text" class="game-setup-inputs" placeholder="Game Path">
+                    
+                    <div class="game-setup-border">
+                        <button type="submit" class="game-setup-button" id="li-btn">Add Game</button>
+                    </div>
+    
+                    <!-- <button class="close-btn"><i class="fas fa-times"></i></button> -->
                 </div>
-            </div> -->
-
+            </div>
         </div>
 {% endblock %}

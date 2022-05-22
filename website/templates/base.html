@@ -269,6 +269,7 @@
     <div class="home-section">
         <i class='wa-menu-alt1'></i>
     </div>
+
     <script>
         let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
@@ -284,6 +285,25 @@
             sidebar.classList.toggle("close");
         });
     </script>
+
+
+    <!-- Toast -->
+    
+    <script>
+        const closeBtn = document.getElementById('close-btn');
+        const toast = document.getElementById("toast");
+
+
+
+        closeBtn.addEventListener('click', () => {
+            toast.parentNode.removeChild(toast);
+        });
+
+        setTimeout(function() {
+            toast.parentNode.removeChild(toast);
+        }, 5000);
+    </script>
+    
     <script src="{{url_for('static', filename='main.js')}}"></script>
 </body>
 
