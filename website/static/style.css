@@ -563,7 +563,7 @@ body {
 }
 
 .game-container:hover .game {
-    height: 45%;
+    height: 35%;
 }
 
 .game-box-text {
@@ -713,18 +713,17 @@ body {
     color: red;
     cursor: pointer;
     transition: transform .25s, opacity .25s;
-	opacity: .7;
+    opacity: .7;
 }
 
-.close-btn:before{
-	content: "";
+.close-btn:before {
+    content: "";
 }
 
-.close-btn:hover{
-	opacity: 1;
-	transform: rotate(90deg);
+.close-btn:hover {
+    opacity: 1;
+    transform: rotate(90deg);
 }
-
 
 .text-success {
     color: #15db15;
@@ -742,13 +741,15 @@ body {
     border-left: 5px solid #166beb;
 }
 
+
 /* Scrollbar (Firefox) */
 
-@supports (scrollbar-color: #0F111A #06070A ) {
-    *{
+@supports (scrollbar-color: #0F111A #06070A) {
+    * {
         scrollbar-color: #0F111A #06070A;
     }
 }
+
 
 /* Game Setup */
 
@@ -772,7 +773,6 @@ body {
     transition: all 0.3s linear;
     visibility: hidden;
     z-index: -10;
-    
 }
 
 .open-modal {
@@ -865,16 +865,16 @@ body {
     left: 96%;
     cursor: pointer;
     transition: transform .25s, opacity .25s;
-	opacity: .7;
+    opacity: .7;
 }
 
-.game-setup-close:before{
-	content: "\d7";
+.game-setup-close:before {
+    content: "\d7";
 }
 
-.game-setup-close:hover{
-	opacity: 1;
-	transform: rotate(90deg);
+.game-setup-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
 }
 
 /* Media Queries */
