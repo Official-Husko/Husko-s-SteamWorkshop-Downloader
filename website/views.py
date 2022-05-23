@@ -30,7 +30,6 @@ def games():
             flash("Please fill out all fields.", category="error")
         else:
             new_game = UserGames(game_id=game_id, game_name=game_name, game_path=game_path, user_id=current_user.id)
-            print(new_game)
             db.session.add(new_game)
             db.session.commit()
 

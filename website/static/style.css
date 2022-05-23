@@ -388,7 +388,7 @@ body {
 }
 
 .login-btn-border {
-    --borderWidth: 3px;
+    --borderWidth: 4px;
     margin-top: 8px;
     background: #1D1F20;
     position: relative;
@@ -450,7 +450,7 @@ body {
 }
 
 .register-btn-border {
-    --borderWidth: 3px;
+    --borderWidth: 4px;
     margin-top: 8px;
     background: #1D1F20;
     position: relative;
@@ -485,7 +485,8 @@ body {
 }
 
 .search-bar-box {
-    background-color: #0C0E15;
+    background-color: rgba(12, 14, 21, 0.35);
+    filter: blur(75);
     width: 100%;
 }
 
@@ -497,13 +498,14 @@ body {
 
 .search-input {
     text-align: center;
-    background-color: #090A10;
+    background-color: rgba(9, 10, 16, 0.25);
     border: none;
     border-radius: 25px;
     outline: none;
     margin: 10px;
     margin-left: 69%;
     padding: 3px 30px;
+    filter: blur(25);
 }
 
 
@@ -532,7 +534,7 @@ body {
 .game-box {
     width: 17.25%;
     height: 123.9px;
-    background-color: #1d1b31;
+    background-color: rgba(12, 14, 21, 0.35);
     position: relative;
     margin: 1.2%;
     cursor: pointer;
@@ -567,13 +569,14 @@ body {
 }
 
 .game-box-text {
-    color: white;
+    color: #dddd;
     opacity: 1;
 }
 
 .game-box-image {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .wa-add {
@@ -824,7 +827,7 @@ body {
 }
 
 .game-setup-border {
-    --borderWidth: 3px;
+    --borderWidth: 4px;
     margin-top: 8px;
     background: #1D1F20;
     position: relative;
@@ -859,7 +862,7 @@ body {
 }
 
 .game-setup-close {
-    color: #ddd;
+    color: #dddd;
     position: absolute;
     top: 5%;
     left: 96%;
@@ -877,7 +880,9 @@ body {
     transform: rotate(90deg);
 }
 
+
 /* Media Queries */
+
 
 /* 4K Resolution */
 
@@ -888,11 +893,9 @@ body {
         margin-top: 80px;
         margin-bottom: 30px;
     }
-
     .search-box {
         padding-right: 20px;
     }
-
     .search-input {
         border-radius: 50px;
         margin: 20px;
@@ -900,187 +903,150 @@ body {
         padding: 6px 60px;
         font-size: 20px;
     }
-
     .game-box {
         height: 100%;
     }
-
     .game-box {
         height: 300px;
     }
-
     .game-container:hover .game {
         font-size: 40px;
         height: 45%;
     }
-
     .mods-installed-text {
         font-size: 33px;
     }
-
     .wa-add {
         font-size: 70px;
     }
-
     .wa-add:hover {
         font-size: 95px;
     }
-
     .game-setup {
         width: 60%;
         height: 650px;
         border-radius: 50px;
     }
-
     .game-setup-inputs {
         margin: 15px;
         padding: 25px;
         font-size: 35px;
         border-radius: 50px;
     }
-
     .game-setup-button {
         padding: 9px 223px;
         border-radius: 50px;
         font-size: 35px;
     }
-
     .game-setup-border {
         --borderWidth: 7px;
         border-radius: 27px;
     }
-
     .game-setup-close {
         top: 6%;
         left: 96%;
         font-size: 40px;
     }
-
     .sidebar {
         width: 520px;
         z-index: 200;
     }
-    
     .sidebar.close {
         width: 156px;
     }
-    
     .sidebar .logo-details {
         height: 120px;
     }
-    
     .sidebar .logo-details i {
         font-size: 60px;
         height: 100px;
         min-width: 156px;
         line-height: 100px;
     }
-    
     .sidebar .logo-details .logo_name {
         font-size: 32px;
     }
-    
     .sidebar .nav-links {
         padding: 60px 0 300px 0;
     }
-    
     .sidebar .nav-links li i {
         height: 100px;
         min-width: 156px;
         line-height: 100px;
         font-size: 40px;
     }
-    
     .sidebar .nav-links li.showMenu i.arrow {
-        transform: rotate(-360deg); /* 180deg last seen */
+        transform: rotate(-360deg);
+        /* 180deg last seen */
     }
-    
     .sidebar .nav-links li a .link_name {
         font-size: 36px;
     }
-    
     .sidebar .nav-links li .sub-menu {
         padding: 12px 12px 28px 160px;
         margin-top: -20px;
     }
-    
     .sidebar .nav-links li .sub-menu a {
         font-size: 30px;
         padding: 10px 0;
     }
-    
     .sidebar.close .nav-links li .sub-menu {
         left: 200%;
         top: -20px;
         padding: 20px 40px;
         border-radius: 0 12px 12px 0;
     }
-    
     .sidebar.close .nav-links li .sub-menu .link_name {
         font-size: 36px;
     }
-    
     .sidebar .nav-links li .sub-menu.blank {
         padding: 6px 40px 12px 32px;
     }
-    
     .sidebar .nav-links li:hover .sub-menu.blank {
         top: 100%;
         transform: translateY(-100%);
     }
-    
     .sidebar .profile-details {
         width: 520px;
         padding: 24px 0;
     }
-    
     .sidebar.close .profile-details {
         width: 156px;
     }
-    
     .sidebar .profile-details img {
         height: 104px;
         width: 104px;
         border-radius: 40px;
         margin: 0 28px 0 24px;
     }
-    
     .sidebar.close .profile-details img {
         padding: 10px;
     }
-    
     .sidebar .profile-details .profile_name,
     .sidebar .profile-details .role {
         font-size: 36px;
     }
-    
     .sidebar .profile-details .role {
         font-size: 24px;
     }
-    
     .home-section {
         padding: 26px 30px;
         font-size: 70px;
         left: 520px;
     }
-    
     .sidebar.close~.home-section {
         left: 156px;
     }
-    
     .home-section .home-content {
         height: 120px;
     }
-    
     .home-section .home-content .bx-menu,
     .home-section .home-content .text {
         font-size: 70px;
     }
-    
     .home-section .home-content .bx-menu {
         margin: 0 30px;
     }
-    
     .home-section .home-content .text {
         font-size: 52px;
     }
