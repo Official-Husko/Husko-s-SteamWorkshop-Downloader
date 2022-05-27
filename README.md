@@ -1,8 +1,11 @@
 # Husko's SteamWorkshop Downloader  
   
 🔴**IMPORTANT**❗🔴  
-The Tool is currently being rewritten so updates will be slow and only on the dev branch until it is stable for a release!  
-  
+Firstly this tool is partially on hold until we find a way to integrate [SteamCMD][4] into it.  
+Secondly, The Tool is currently being rewritten so updates will be slow and only on the dev & web-ui test branch until it is stable for a release!  
+
+<br />
+
 With this tool you can download and install mods from the SteamWorkshop Easily.
 This tool will download the file you entered via the steam workshop link and install it in the folder you configured.
 
@@ -26,7 +29,7 @@ Update Grabber
 Collection Support  
 Grabs Dependencies  
 
-<br>
+<br />
 
 ### Known Issues
 ~~Entering an invalid id will make the bot crash~~  ***Fixed in 1.4***  
@@ -34,7 +37,7 @@ Grabs Dependencies
 ~~Bot Will Crash when discord is not running.~~ ***Fixed in 1.5***  
 Certain Collections may throw an installation error. This can be safely ignored for now.  
   
-<br>
+<br />
 
 ### Planned  
 ~~Feature to download collections~~ ***Added in 1.5***    
@@ -45,12 +48,13 @@ Linux Support
 A real auto updater  
 Adding an API to communicate with a browser addon  
 Code Cleanup    
-<br>
+<br />
 #
 
 [1]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/wiki
 [2]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest
 [3]: https://steamworkshopdownloader.io/
+[4]:https://developer.valvesoftware.com/wiki/SteamCMD
 
 #### Disclaimer  
 ***We are not in any way affiliated or working with the team from [Steam Workshop Downloader IO][3]. This is a unofficial project.***  
