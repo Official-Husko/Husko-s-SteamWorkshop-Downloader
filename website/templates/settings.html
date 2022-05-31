@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block title %}Settings{% endblock %} {% block content %}
+
+<div class="AS-background">
+    <div class="AS-box"> <!-- AS => Application Settings -->
+        <p>Application Settings</p>
+    </div>
+</div>
+
+<form method="POST"> 
+    <div class="switch-container">
+        <div class="switch-content">
+            <div class="switches">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                    <p class="slider-text">Check for Updates</p>
+                </label>
+            </div>
+
+            <div class="switches">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                    <p class="slider-text">Use Proxies</p>
+                </label>
+            </div>
+
+            <div class="switches">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                    <p class="slider-text">Randomize User Agent</p>
+                </label>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="PS-background">
+    <div class="PS-box"> <!-- PS => Profile Settings -->
+        <p>Profile Settings</p>
+    </div>
+</div>
+
+<div>
+    <div class="pfp-circle"></div>
+
+    <div class="profile-container">
+        <input type="text" class="profile-inputs" placeholder="BarbaraWithBigTitties">
+        <input type="password" class="profile-inputs" placeholder="Old Password">
+        <input type="password" class="profile-inputs" placeholder="New Password">
+        <input type="password" class="profile-inputs" placeholder="Confirm New Password">
+    </div>
+
+    <div class="delete-account">
+        <button type="submit" class="delete-account-btn">Delete Account</button>
+    </div>
+</div>
+
+
+{% endblock %}
