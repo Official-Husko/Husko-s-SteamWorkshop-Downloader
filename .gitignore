@@ -15,3 +15,9 @@ test.py
 .gitignore
 
 *.URL
+
+contained/
+
+website/database.db
+
+website/Wolf-Awesome-Lite.exe
