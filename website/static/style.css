@@ -881,10 +881,194 @@ body {
 }
 
 
+/* Settings */
+
+/* Application Settings Content */
+
+.AS-background {
+    position: relative;
+    background-color:#0C0E15;
+    text-align: center;
+    padding: 10px;
+    opacity: 0.8;
+    border-radius: 20px;
+    width: 85%;
+    left: 11%;
+    top: 25px;
+}
+
+/* Switch */
+
+.switch-container {
+
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    /* border: 1px solid red; */
+    position: relative;
+    top: 70px;
+    right: -13.4%;
+    width: 80%;
+}
+
+.switches {
+    padding: 7px 0;
+    /* margin-bottom: 15px; */
+}
+
+ /* The switch - the box around the slider */
+ .switch {
+    position: relative;
+    display: inline-block;
+    width: 85px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0C0E15;
+    opacity: 0.8;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 34px;
+    width: 35px;
+    left: 0px;
+    bottom: 0px;
+    background-color: #075200;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider::before {
+    background-color: #292C3B;
+  }
+  
+  input:focus + .slider::before {
+    box-shadow: 0 0 1px #292C3B;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(50px);
+    -ms-transform: translateX(50px);
+    transform: translateX(50px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  } 
+
+  .slider-text {
+    position: absolute;
+    left: 115%;
+    /* border: 1px solid red; */
+    width: 165px;
+    font-size: 14px;
+    top: 5px;
+    color: silver;
+  }
+
+/* Profile Settings Content */
+
+.PS-background {
+    position: absolute;
+    background-color:#0C0E15;
+    text-align: center;
+    padding: 10px;
+    opacity: 0.8;
+    border-radius: 20px;
+    width: 85%;
+    left: 11%;
+    /* top: 480px; */
+    top: 300px;
+}
+
+/* Profile Picture Circle */
+
+.pfp-circle {
+    position: absolute;
+    height: 10%;
+    padding: 80px;
+    border-radius: 50%;
+    background-color: #0C0E15;
+    opacity: 0.8;
+    left: 13%;
+    top: 60.5%;
+}
+
+/* Profile Inputs */
+
+.profile-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    left: 25%;
+    top: 58%;
+}
+
+.profile-inputs {
+    padding: 6px;
+    margin: 8px 0;
+    border-radius: 20px;
+    text-align: center;
+    color: silver;
+    background-color: #0C0E15;
+    opacity: 0.8;
+    outline: none;
+    border: none;
+}
+
+/* Delete Account */
+
+.delete-account {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    left: 66%;
+    top: 58%;
+}
+
+.delete-account-btn {
+    padding: 6px;
+    margin: 8px 0;
+    border-radius: 20px;
+    text-align: center;
+    color: red;
+    background-color: #0C0E15;
+    opacity: 0.8;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
 /* Media Queries */
 
 
-/* 4K Resolution */
+/* 4K 3840 x 2160 Resolution */
 
 @media (min-width: 3840px) {
     .search-container {
@@ -912,6 +1096,11 @@ body {
     .game-container:hover .game {
         font-size: 40px;
         height: 45%;
+    }
+    .game-box-image {
+        font-size: 45px;
+        line-height: 300px;
+        text-align: center;
     }
     .mods-installed-text {
         font-size: 33px;
@@ -1049,5 +1238,264 @@ body {
     }
     .home-section .home-content .text {
         font-size: 52px;
+    }
+
+    /* Settings */
+
+    .AS-background {
+        padding: 20px;
+        font-size: 30px;
+        border-radius: 50px;
+        top: 40px;
+    }
+
+    .PS-background {
+        padding: 20px;
+        font-size: 30px;
+        border-radius: 50px;
+        top: 1100px;
+    }
+
+    .switch {
+        width: 170px;
+        height: 68px;
+    }
+
+    .switch-container {
+        top: 107px;
+    }
+
+    .switches {
+        padding: 13px 0;
+    }
+
+    .slider-text {
+        width: 305px;
+        font-size: 27px;
+        top: 10px;
+    }
+
+    .slider.round {
+        border-radius: 50px;
+    }
+
+    .slider::before {
+        height: 68px;
+        width: 70px;
+    }
+
+    input:checked + .slider::before {
+        -webkit-transform: translateX(100px);
+        -ms-transform: translateX(100px);
+        transform: translateX(100px);
+    }
+
+    .pfp-circle {
+        padding: 160px;
+        top: 58%;
+    }
+
+    .profile-inputs {
+        padding: 12px;
+        margin: 9px 0;
+        border-radius: 40px;
+        font-size: 20px;
+    }
+
+    .profile-container {
+        left: 24%;
+    }
+
+    .delete-account {
+        left: 74%;
+    }
+
+    .delete-account-btn {
+        padding: 12px;
+        margin: 9px 0;
+        border-radius: 40px;
+        font-size: 20px;
+    }
+}
+
+/* 2K 2560 x 1440 Resolution */
+
+@media (min-width: 2560px) and (max-width: 3838px) {
+    .game-box {
+        height: 164.9px;
+    }
+    .game-box-image {
+        font-size: 35px;
+        line-height: 165px;
+        text-align: center;
+    }
+    .game-container:hover .game {
+        font-size: 27px;
+        height: 50%;
+    }
+    .game-setup-close {
+        left: 96.5%;
+        top: 6%;
+        font-size: 19px;
+    }
+    .mods-installed-text {
+        font-size: 20px;
+    }
+    .wa-add {
+        font-size: 50px;
+    }
+    .wa-add:hover {
+        font-size: 65px;
+    }
+
+    .AS-background {
+        font-size: 20px;
+        border-radius: 50px;
+        left: 9%;
+    }
+
+    .PS-background {
+        font-size: 20px;
+        border-radius: 50px;
+        top: 760px;
+        left: 9%;
+    }
+
+    .switch {
+        width: 120px;
+        height: 45px;
+    }
+
+    .slider.round {
+        border-radius: 50px;
+    }
+
+    .slider::before {
+        height: 45px;
+        width: 47px;
+    }
+
+    input:checked + .slider::before {
+        -webkit-transform: translateX(75px);
+        -ms-transform: translateX(75px);
+        transform: translateX(75px);
+    }
+
+    .slider-text {
+        width: 271px;
+        font-size: 20px;
+        top: 5px;
+    }
+
+    .switch-container {
+        right: -11.4%;
+    }
+
+    .pfp-circle {
+        padding: 110px;
+        left: 11%;
+    }
+
+    .profile-container {
+        width: 19%;
+        left: 22%;
+        top: 59%;
+    }
+
+    .profile-inputs {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .delete-account {
+        left: 72%;
+        top: 59%;
+    }
+
+    .delete-account-btn {
+        padding: 10px;
+        font-size: 15px;
+    }
+}
+
+/* 1920 x 1080 Resolution */
+
+@media (min-width: 1920px) and (max-width: 2558px) {
+    .game-setup-close {
+        left: 96%;
+        top: 6%;
+    }
+
+    .PS-background {
+        top: 550px;
+    }
+
+    .pfp-circle {
+        left: 14.3%;
+        top: 60%;
+    }
+
+    .delete-account {
+        left: 73%;
+    }
+}
+
+/* 1680 x 1050 Resolution */
+
+@media (min-width: 1680px) and (max-width: 1918px) {
+    .PS-background {
+        top: 490px;
+    }
+}
+
+/* 1366 x 768 Resolution */
+
+@media (min-width: 1366px) and (max-width: 1678px) {
+    .game-box-image {
+        font-size: 18px;
+        line-height: 120px;
+        text-align: center;
+    }
+    .game-container:hover .game {
+        height: 43%;
+    }
+    .game-setup-close {
+        left: 95%;
+    }
+
+    /* Settings */
+
+    .AS-background {
+        padding: 8px;
+        width: 80%;
+        left: 13%;
+    }
+
+    .PS-background {
+        padding: 8px;
+        width: 80%;
+        left: 13%;
+        top: 330px;
+    }
+
+    .switch-container {
+        top: 60px;
+        right: -15.4%;
+    }
+
+    .pfp-circle {
+        left: 15.3%;
+        top: 60%;
+    }
+
+    .profile-container {
+        left: 30%;
+        top: 57%;
+        width: 21%;
+    }
+
+    .delete-account {
+        top: 57%;
+        left: 71%;
     }
 }
