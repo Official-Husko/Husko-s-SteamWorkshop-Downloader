@@ -599,37 +599,6 @@ body {
 }
 
 
-/* Downloader */
-
-.downloader-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.downloader-search-box {
-    padding: 50px;
-    width: 60%;
-    position: relative;
-    bottom: 20px;
-}
-
-.workshop-search {
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    padding: 8px;
-    background-color: #0C0E15;
-    text-align: center;
-    width: 50%;
-    position: absolute;
-    left: 25%;
-    top: 20%;
-}
-
-
 /* Modlist */
 
 .modlist-container {
@@ -817,7 +786,6 @@ body {
     border-radius: 14px;
     cursor: pointer;
     outline: none;
-    /* transition: 0.5s; */
 }
 
 .game-setup-button:hover {
@@ -904,7 +872,6 @@ body {
     display: flex;
     justify-content: left;
     align-items: left;
-    /* border: 1px solid red; */
     position: relative;
     top: 70px;
     right: -13.4%;
@@ -913,10 +880,10 @@ body {
 
 .switches {
     padding: 7px 0;
-    /* margin-bottom: 15px; */
 }
 
  /* The switch - the box around the slider */
+
  .switch {
     position: relative;
     display: inline-block;
@@ -925,6 +892,7 @@ body {
   }
   
   /* Hide default HTML checkbox */
+
   .switch input {
     opacity: 0;
     width: 0;
@@ -932,6 +900,7 @@ body {
   }
   
   /* The slider */
+
   .slider {
     position: absolute;
     cursor: pointer;
@@ -972,6 +941,7 @@ body {
   }
   
   /* Rounded sliders */
+
   .slider.round {
     border-radius: 34px;
   }
@@ -983,7 +953,6 @@ body {
   .slider-text {
     position: absolute;
     left: 115%;
-    /* border: 1px solid red; */
     width: 165px;
     font-size: 14px;
     top: 5px;
@@ -1001,7 +970,6 @@ body {
     border-radius: 20px;
     width: 85%;
     left: 11%;
-    /* top: 480px; */
     top: 300px;
 }
 
@@ -1065,12 +1033,205 @@ body {
     cursor: pointer;
 }
 
+
+/* Downloader */
+
+.downloader-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.downloader-content {
+    width: 80%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 2.5%;
+    top: -30px;
+}
+
+.mod-image-container {
+    border-radius: 9px;
+    background-color: #090A10;
+    background: rgba(12, 14, 21, 0.55);
+    backdrop-filter: blur(4px);
+    width: 250px;
+    height: 235px;
+    position: absolute;
+    top: 0vh;
+    left: 0%;
+}
+
+.mod-image {
+    border-radius: 9px;
+    width: 210px;
+    height: 195px;
+    position: absolute;
+    top: 19px;
+    left: 7.6%;
+}
+
+.mod-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 9px;
+}
+
+.stats {
+    border-radius: 9px;
+    width: 250px;
+    height: 235px;
+    position: absolute;
+    top: 36.2vh;
+    left: 0%;
+    background-color: #090A10;
+    background: rgba(12, 14, 21, 0.55);
+    backdrop-filter: blur(4px);
+}
+
+.stats-background {
+    padding: 3px;
+    border-radius: 50px;
+    background-color: #090A10;
+    position: absolute;
+    top: 14px;
+    left: 18px;
+}
+
+.stats-pfp {
+    padding: 17px;
+    border-radius: 50px;
+    background-color: #0F111A;
+}
+
+.stats-text {
+    text-align: center;
+    margin-left: 15px;
+    line-height: 20px;
+}
+
+.author-text {
+    font-size: 12px;
+    color: #303030;
+    margin-top: 12px;
+}
+
+.author-name {
+    font-size: 14px;
+}
+
+.updated-text {
+    font-size: 12px;
+    color: #303030;
+    margin-top: 12px;
+}
+
+.size-text {
+    font-size: 12px;
+    color: #303030;
+    margin-top: 12px;
+}
+
+.mod-size {
+    font-size: 14px;
+}
+
+.stats-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    top: 45px;
+    font-size: 13px;
+}
+
+.eye-icon {
+    font-size: 16px;
+    margin-right: -7px;
+}
+
+.down-arrow-icon {
+    font-size: 16px;
+    margin-right: -7px;
+}
+
+.star-icon {
+    font-size: 16px;
+    margin-right: -7px;
+}
+
+.mod-information {
+    border-radius: 9px;
+    width: 75.6%;
+    height: 70vh;
+    position: absolute;
+    left: 24.5%;
+    background: rgba(12, 14, 21, 0.55);
+    backdrop-filter: blur(4px);
+}
+
+.mod-title {
+    position: absolute;
+    background-color: #0C0E15;
+    text-align: center;
+    padding: 8px;
+    opacity: 0.8;
+    border-radius: 13px;
+    width: 95%;
+    left: 2.3%;
+    top: 480px;
+    top: 25px;
+    font-size: 14px;
+}
+
+.mod-description {
+    width: 95%;
+    height: 56vh;
+    position: absolute;
+    left: 2.2%;
+    top: 73px;
+    text-align: center;
+    overflow: auto;
+    color: #ddd;
+}
+
+.description-text {
+    font-size: 14px;
+}
+
+.workshop-link {
+    position: absolute;
+    top: 510px;
+    left: 30%;
+}
+
+.workshop-link-input {
+    padding: 7px 70px;
+    border: none;
+    background-color: #0C0E15;
+    color: #ddd;
+    border-radius: 14px;
+    outline: none;
+    text-align: center;
+}
+
+.workshop-link-input, a {
+    text-decoration: none;
+}
+
+
 /* Media Queries */
 
 
 /* 4K 3840 x 2160 Resolution */
 
-@media (min-width: 3840px) {
+@media (min-width: 3838px) {
     .search-container {
         width: 76.85%;
         margin-left: 12.9%;
@@ -1180,7 +1341,7 @@ body {
         padding: 10px 0;
     }
     .sidebar.close .nav-links li .sub-menu {
-        left: 200%;
+        left: 100%;
         top: -20px;
         padding: 20px 40px;
         border-radius: 0 12px 12px 0;
@@ -1316,6 +1477,131 @@ body {
         border-radius: 40px;
         font-size: 20px;
     }
+
+    /* Downloader */
+
+    .mod-image-container {
+        border-radius: 18px;
+        width: 750px;
+        height: 705px;
+    }
+
+    .mod-image {
+        border-radius: 18px;
+        width: 660px;
+        height: 625px;
+        top: 40.8px;
+        left: 6%;
+    }
+
+    .stats {
+        border-radius: 18px;
+        width: 750px;
+        height: 705px;
+        top: 34vh;
+    }
+
+    .stats-text {
+        line-height: 55px;
+        margin-top: 40px;
+    }
+
+    .stats-icons {
+        font-size: 30px;
+    }
+
+    .stats-background {
+        padding: 15px;
+        border-radius: 65px;
+        top: 40px;
+        left: 49px;
+    }
+
+    .stats-pfp {
+        padding: 45px;
+    }
+
+    .author-text {
+        font-size: 36px;
+    }
+    
+    .author-name {
+        font-size: 42px;
+        margin-bottom: 70px;
+    }
+
+    .updated-text {
+        font-size: 36px;
+    }
+
+    .updated-date-text {
+        font-size: 42px;
+        margin-bottom: 70px;
+    }
+
+    .size-text {
+        font-size: 36px;
+    }
+
+    .mod-size {
+        font-size: 42px;
+        margin-bottom: 70px;
+    }
+
+    .eye-icon {
+        font-size: 40px;
+        margin-left: -2%;
+    }
+
+    .down-arrow-icon {
+        font-size: 40px;
+    }
+
+    .star-icon {
+        font-size: 40px;
+    }
+
+    .mod-information {
+        border-radius: 18px;
+        width: 74.6%;
+        height: 66.6vh;
+        position: absolute;
+        left: 25.5%;
+        top: 0px;
+    }
+
+    .mod-title {
+        padding: 18px;
+        border-radius: 38px;
+        top: 30px;
+        font-size: 35px;
+    }
+
+    .mod-description {
+        /* border: 2px solid aqua; */
+        top: 143px;
+    }
+
+    .description-text {
+        font-size: 28px;
+        line-height: 1.6em;
+    }
+
+    .workshop-link {
+        top: 69vh;
+        left: 25%;
+    }
+
+    .workshop-link-input {
+        padding: 18px;
+        border-radius: 34px;
+        width: 70vh;
+        font-size: 35px;
+    }
+
+    .downloader-content {
+        left: 1.5%;
+    }
 }
 
 /* 2K 2560 x 1440 Resolution */
@@ -1416,6 +1702,131 @@ body {
         padding: 10px;
         font-size: 15px;
     }
+
+    /* Downloader */
+
+    .mod-image-container {
+        width: 490px;
+        height: 495px;
+    }
+
+    .mod-image {
+        width: 450px;
+        height: 456px;
+        left: 4%;
+    }
+
+    .stats {
+        width: 490px;
+        height: 495px;
+        top: 35.7vh;
+    }
+
+    .stats-text {
+        line-height: 35px;
+    }
+
+    .stats-icons {
+        top: 30px;
+    }
+
+    .stats-background {
+        padding: 6px;
+        top: 47px;
+        left: 38px;
+    }
+
+    .stats-pfp {
+        padding: 32px;
+    }
+
+    .author-text {
+        margin-top: 45px;
+        font-size: 20px;
+    }
+    
+    .author-name {
+        font-size: 28px;
+        margin-bottom: 45px;
+    }
+
+    .updated-text {
+        font-size: 20px;
+    }
+
+    .updated-date-text {
+        font-size: 28px;
+        margin-bottom: 45px;
+    }
+
+    .size-text {
+        font-size: 20px;
+    }
+
+    .mod-size {
+        font-size: 28px;
+        margin-bottom: 65px;
+    }
+
+    .eye-icon {
+        font-size: 30px;
+    }
+
+    .down-arrow-icon {
+        font-size: 30px;
+    }
+
+    .star-icon {
+        font-size: 30px;
+    }
+
+    .views-text {
+        font-size: 23px;
+    }
+
+    .downloads-text {
+        font-size: 23px;
+    }
+
+    .star-text {
+        font-size: 23px;
+    }
+
+    .mod-title {
+        font-size: 24px;
+        padding: 12px;
+        border-radius: 30px;
+    }
+
+    .mod-information {
+        left: 24.8%;
+    }
+
+    .mod-description {
+        top: 133px;
+    }
+
+    .description-text {
+        font-size: 23px;
+        line-height: 1.6em;
+    }
+
+    .workshop-link {
+        top: 1042px;
+        left: 444px;
+    }
+
+    .workshop-link-input {
+        font-size: 24px;
+        padding: 12px;
+        border-radius: 30px;
+        width: 80vh;
+    }
+
+    .downloader-content {
+        left: 1%;
+        top: -40px;
+    }
 }
 
 /* 1920 x 1080 Resolution */
@@ -1438,6 +1849,117 @@ body {
     .delete-account {
         left: 73%;
     }
+
+    .mod-image-container {
+        width: 360px;
+        height: 370px;
+    }
+
+    .stats {
+        width: 360px;
+        height: 370px;
+        top: 35.8vh;
+    }
+
+    .stats-text {
+        line-height: 26px;
+        margin-top: 25px;
+    }
+
+    .stats-icons {
+        font-size: 17px;
+        top: 75px;
+    }
+
+    .stats-background {
+        top: 26px;
+        left: 27px;
+        padding: 3px;
+    }
+
+    .stats-pfp {
+        padding: 24px;
+    }
+
+    .mod-image {
+        width: 320px;
+        height: 335px;
+        top: 18px;
+        left: 5.6%;
+    }
+
+    .author-text {
+        font-size: 16px;
+    }
+
+    .author-name {
+        font-size: 21px;
+        margin-bottom: 25px;
+    }
+
+    .updated-text {
+        font-size: 16px;
+    }
+
+    .updated-date-text {
+        font-size: 21px;
+        margin-bottom: 25px;
+    }
+
+    .size-text {
+        font-size: 16px;
+    }
+
+    .mod-size {
+        font-size: 21px;
+        margin-bottom: 25px;
+    }
+
+    .eye-icon {
+        font-size: 20px;
+    }
+
+    .down-arrow-icon {
+        font-size: 20px;
+    }
+
+    .star-icon {
+        font-size: 20px;
+    }
+
+    .mod-title {
+        border-radius: 23px;
+        font-size: 18px;
+    }
+
+    .workshop-link {
+        top: 790px;
+        left: 380px;
+    }
+
+    .workshop-link-input {
+        border-radius: 23px;
+        font-size: 18px;
+        width: 70vh;
+    }
+
+    .mod-information {
+        left: 24.4%;
+    }
+
+    .mod-description {
+        top: 93px;
+    }
+
+    .description-text {
+        font-size: 15px;
+        line-height: 1.6em;
+    }
+
+    .downloader-content {
+        left: 2%;
+        top: -40px;
+    }
 }
 
 /* 1680 x 1050 Resolution */
@@ -1445,6 +1967,116 @@ body {
 @media (min-width: 1680px) and (max-width: 1918px) {
     .PS-background {
         top: 490px;
+    }
+
+    /* Downloader */
+
+    .mod-image-container {
+        width: 315px;
+        height: 335px;
+    }
+
+    .mod-title {
+        border-radius: 23px;
+        font-size: 16px;
+    }
+
+    .stats {
+        width: 315px;
+        height: 335px;
+        top: 35.7vh;
+    }
+
+    .stats-text {
+        margin-top: 25px;
+        line-height: 1.5em;
+    }
+
+    .stats-icons {
+        font-size: 15px;
+        top: 55px;
+    }
+
+    .stats-background {
+        top: 27px;
+        left: 25px;
+        padding: 4px;
+    }
+
+    .stats-pfp {
+        padding: 21px;
+    }
+
+    .mod-image {
+        width: 280px;
+        height: 295px;
+        top: 19px;
+        left: 5.6%;
+    }
+
+    .author-text {
+        font-size: 13px;
+        
+    }
+
+    .author-name {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .updated-text {
+        font-size: 13px;
+    }
+
+    .updated-date-text {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .size-text {
+        font-size: 13px;
+    }
+
+    .mod-size {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .eye-icon {
+        font-size: 20px;
+    }
+
+    .down-arrow-icon {
+        font-size: 20px;
+    }
+
+    .star-icon {
+        font-size: 20px;
+    }
+
+    .workshop-link {
+        top: 710px;
+        left: 25%;
+    }
+
+    .workshop-link-input {
+        border-radius: 23px;
+        font-size: 16px;
+        width: 70vh;
+    }
+
+    .mod-description {
+        top: 93px;
+    }
+
+    .description-text {
+        font-size: 15px;
+        line-height: 1.7em;
+    }
+
+    .downloader-content {
+        left: 2.3%;
+        top: -40px;
     }
 }
 

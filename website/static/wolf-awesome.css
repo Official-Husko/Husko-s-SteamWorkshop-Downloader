@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'wolf';
-  src: url('wolf-awesome.eot');
-  src: url('wolf-awesome.eot') format('embedded-opentype'), url('wolf-awesome.ttf') format('truetype'), url('wolf-awesome.woff') format('woff'), url('wolf-awesome.svg') format('svg');
+  src: url('./wolf-awesome.eot');
+  src: url('./wolf-awesome.eot') format('embedded-opentype'), url('./wolf-awesome.ttf') format('truetype'), url('./wolf-awesome.woff') format('woff'), url('./wolf-awesome.svg') format('svg');
   font-style: normal;
   font-display: block;
 }
@@ -20,6 +20,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.wa-down-arrow:before {
+  content: "\e913";
+}
+.wa-eye:before {
+  content: "\e914";
+}
+.wa-star:before {
+  content: "\e915";
+}
 .wa-add:before {
   content: "\e912";
 }
