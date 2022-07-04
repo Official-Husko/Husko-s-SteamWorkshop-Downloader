@@ -3,6 +3,11 @@ from flask_login import current_user, login_required
 from . import db
 from .models import User, UserGames
 import requests as rq
+import subprocess
+import requests
+import re
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+from time import sleep
 
 views = Blueprint("views", __name__)
 
@@ -46,10 +51,56 @@ def games():
 
     return render_template("games.html", user=current_user)
 
-@views.route("/downloader")
+@views.route("/downloader", methods=["GET", "POST"])
 @login_required
 def downloader():
-    return render_template("downloader.html", user=current_user)
+    if request.method == "POST":
+        prepared_ids = {
+            "key" : "DE24D89C1E9B80E36ED9E3AD3938B7C2",
+            "itemcount" : "1"
+            }
+        url = request.form.get("workshop-link")
+        xid = url.strip("https://steamcommunity.com/workshop/filedetails/?id=")
+        id = re.match(r"(.*\d+)", xid).group()
+
+        print("POST SENT!")
+        id_data = {f"publishedfileids[{0}]": id}
+        prepared_ids.update(id_data)
+        print(prepared_ids)
+        print("Mods prepared: ", str(len(prepared_ids)))
+        form_data = MultipartEncoder(prepared_ids)
+        #print(form_data)
+        data = requests.post("https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/", data=form_data, headers={'Content-Type': form_data.content_type}).json()
+        print("")
+        #print(data)
+        for mod in data["response"]["publishedfiledetails"]:
+            mod_creator_id = mod["creator"]
+            mod_size = mod["file_size"]
+            mod_image = mod["preview_url"]
+            mod_name = mod["title"]
+            mod_desc = mod["description"]
+            mod_updated = mod["time_updated"]
+            mod_subs = mod["lifetime_subscriptions"]
+            mod_favs = mod["lifetime_favorited"]
+            mod_views = mod["views"]
+            print("")
+            print("Creator ID: ", mod_creator_id)
+            print("Size: ", mod_size)
+            print("Image: ", mod_image)
+            print("Name: ", mod_name)
+            #print("Description: ", mod_desc)
+            print("Updated: ", mod_updated)
+            print("Subscriptions: ", mod_subs)
+            print("Favorites: ", mod_favs)
+            print("Views: ", mod_views)
+            print("")
+            creator_data = requests.get(f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=DE24D89C1E9B80E36ED9E3AD3938B7C2&steamids={mod_creator_id}").json()
+            creator_name = creator_data["response"]["players"][0]["personaname"]
+            creator_image = creator_data["response"]["players"][0]["avatarfull"]
+            print(creator_name)
+            print(creator_image)
+    else:
+        return render_template("downloader.html", user=current_user)
 
 @views.route("/settings")
 @login_required

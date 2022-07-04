@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %}Downloader{% endblock %} {% block content %}
+    <div class="downloader-container">
+        <div class="downloader-content">
+            <div class="mod-image-container">
+                <div class="mod-image">
+                    <img src="{{ mod_image }}" alt="">
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stats-background">
+                    <div class="stats-pfp"></div>
+                        <img src="{{ creator-image }}" alt="">
+                </div>
+
+                <div class="stats-text">
+                    <p class="author-text">Author</p>
+                    <p class="author-name">{{ author }}</p>
+
+                    <p class="updated-text">Updated</p>
+                    <p class="updated-date-text">{{ updated }}</p>
+                    
+                    <p class="size-text">Size</p>
+                    <p class="mod-size">{{ mod_size }}</p>
+                </div>
+
+                <div class="stats-icons">
+                    <p class="wa-eye eye-icon"></p>
+                    <p class="views-text">{{ views }}</p>
+                    
+                    <p class="wa-down-arrow down-arrow-icon center-icon"></p>
+                    <p class="downloads-text center-icon">{{ downloads }}</p>
+                    
+                    <p class="wa-star star-icon star-right-icon"></p>
+                    <p class="star-text star-right-icon">{{ favorites }}</p>
+                </div>
+            </div>
+
+            <div class="mod-information">
+                <div class="mod-title">
+                    <a href="#"><p>{{ title }}</p></a>
+                </div>
+                
+                <div class="mod-description">
+                    <p class="description-text">{{ description }}</p>
+                </div>
+            </div>
+
+            <form method="POST">
+                <label for="authorize-download"></label>
+                <div class="workshop-link">
+                    <button type="submit" class="login-btn" id="li-btn">Download</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

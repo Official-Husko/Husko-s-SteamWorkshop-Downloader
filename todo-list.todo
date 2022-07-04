@@ -1,0 +1,20 @@
+Systems:
+    [ ] Game Database Loader
+    [ ] Game Database Verifier
+    [ ] Game Databse Updater
+    [ ] Custom Game Database Loader
+    [ ] Program Database Migrater
+    [ ] Mod Auto Updater
+    [ ] Mod Files Verifier
+    [ ] Collection Downloader
+    [ ] Modlist Importer/Exporter
+
+User-Friendliness: 
+    [ ] Reworked Login Page with gif showcase and more data input
+
+User-Interface:
+
+Extensions:
+    [] Integrate New Content Delivery System
+        On-Hold
+    
