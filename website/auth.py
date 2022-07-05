@@ -17,6 +17,8 @@ def login():
             if check_password_hash(user.password, password):
                 flash("Logged in Successfully!", category="success")
                 session['username'] = request.form['username']
+                session['steam_api_key'] = user.steam_api_key
+                print("Steam API Key: ", user.steam_api_key)
                 login_user(user, remember=True)
                 return redirect(url_for("views.home"))
             else:
@@ -29,7 +31,11 @@ def login():
 @auth.route("/logout")
 @login_required
 def logout():
-    session.pop('username', None)
+    # Clear session data
+    session.pop('username', None, )
+    session.pop('steam_api_key', None, )
+
+    # Finally log out user
     logout_user()
     flash("Successfully Logged Out!", category="success")
     return redirect(url_for("auth.login"))
@@ -40,6 +46,7 @@ def sign_up():
         username = request.form.get("username")
         password = request.form.get("password")
         password_confirm = request.form.get("password-confirm")
+        steam_api_key = request.form.get('steam-api-key')
 
         user = User.query.filter_by(username=username).first()
         if user:
@@ -49,11 +56,12 @@ def sign_up():
         elif len(password) + 1 <= 4:
             flash("Password must be at least 4 characters long!", category="error")
         else:
-            new_user = User(username=username, password=generate_password_hash(password, method="sha256"))
+            new_user = User(username=username, password=generate_password_hash(password, method="sha256"), steam_api_key=steam_api_key)
             db.session.add(new_user)
             db.session.commit()
             user = User.query.filter_by(username=username).first()
             session['username'] = request.form['username']
+            session['steam_api_key'] = request.form['steam-api-key']
             login_user(user, remember=True)
             flash("Account Created Successfully!", category="success")
             return redirect(url_for("views.home"))

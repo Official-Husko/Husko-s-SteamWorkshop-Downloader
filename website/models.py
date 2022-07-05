@@ -28,5 +28,6 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(), unique=True)
     password = db.Column(db.String())
+    steam_api_key = db.Column(db.String(64))
     games = db.relationship("UserGames")
     mods = db.relationship("UserMods")

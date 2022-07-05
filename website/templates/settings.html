@@ -43,18 +43,22 @@
 </div>
 
 <div>
-    <div class="pfp-circle"></div>
+    <div class="pfp-circle">
+        <img src="/static/default-avatar.gif">
+    </div> 
 
     <div class="profile-container">
-        <input type="text" class="profile-inputs" placeholder="BarbaraWithBigTitties">
+        <input type="text" class="profile-inputs" placeholder="{{ session['username'] }}">
         <input type="password" class="profile-inputs" placeholder="Old Password">
         <input type="password" class="profile-inputs" placeholder="New Password">
         <input type="password" class="profile-inputs" placeholder="Confirm New Password">
+        <input type="text" class="profile-inputs" value="{{ session['steam_api_key'] }}" placeholder="Steam API Key">
     </div>
-
-    <div class="delete-account">
-        <button type="submit" class="delete-account-btn">Delete Account</button>
-    </div>
+    <form method="POST">
+        <div class="delete-account">
+            <button type="submit" name="delete-account" class="delete-account-btn" value="1" ">Delete Account</button>
+        </div>
+    </form>
 </div>
 
 
