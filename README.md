@@ -1,8 +1,9 @@
 # Husko's SteamWorkshop Downloader  
   
-🔴**IMPORTANT**❗🔴  
-Firstly this tool is partially on hold until we find a way to integrate [SteamCMD][4] into it.  
-Secondly, The Tool is currently being rewritten so updates will be slow and only on the dev & web-ui test branch until it is stable for a release!  
+## 🔴**IMPORTANT**❗🔴  
+Firstly, this tool is on hold indefinitely until there is a better way to get steam mods and download them. [SteamCMD][4] is unreliable and overall just not what is needed for such a project.  
+Secondly, The Tool is currently being rewritten so updates will be slow and only on the [dev][5] & [web-ui][6] test branch until it is stable for a release!  
+***Last but not least it will currently only crash so don't be suprised about it.***
 
 <br />
 
@@ -54,7 +55,10 @@ Code Cleanup
 [1]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/wiki
 [2]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/releases/latest
 [3]: https://steamworkshopdownloader.io/
-[4]:https://developer.valvesoftware.com/wiki/SteamCMD
+[4]: https://developer.valvesoftware.com/wiki/SteamCMD
+[5]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/tree/dev
+[6]: https://github.com/Official-Husko/Husko-s-SteamWorkshop-Downloader/tree/web-ui-test
+
 
 #### Disclaimer  
 ***We are not in any way affiliated or working with the team from [Steam Workshop Downloader IO][3]. This is a unofficial project.***  
