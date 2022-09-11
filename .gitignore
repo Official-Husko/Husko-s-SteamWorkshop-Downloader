@@ -13,3 +13,7 @@ update/
 website/Wolf-Awesome-Lite.exe
 
 website/database.db
+
+contained/
+
+test.py
